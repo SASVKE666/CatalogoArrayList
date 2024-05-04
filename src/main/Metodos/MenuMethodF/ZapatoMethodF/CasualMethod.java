@@ -61,7 +61,7 @@ public class CasualMethod {
                 JOptionPane.showMessageDialog(null,
                         "Ups! Error!",
                         "Zapato Casual Menu",
-                        JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.ERROR_MESSAGE);
             }
 
         } while (selectZapato != 5);
@@ -70,9 +70,23 @@ public class CasualMethod {
     public static void inputZapatoCasual() {
 
         try {
-            int count = Integer.valueOf(JOptionPane.showInputDialog(
-                    "¿Cuántos zapatos casuales desea ingresar?",
-                    "01"));
+
+            int count;
+            while (true) {
+                try {
+                    count = Integer.valueOf(JOptionPane.showInputDialog(null,
+                            "¿Cuántos zapatos casuales desea ingresar? ",
+                            "01"));
+                    break;
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Ingrese un número", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            /*
+             * int count = Integer.valueOf(JOptionPane.showInputDialog(
+             * "¿Cuántos zapatos casuales desea ingresar?",
+             * "01"));
+             */
 
             for (int i = 0; i < count; i++) {
 
@@ -83,9 +97,17 @@ public class CasualMethod {
                     throw new NullPointerException();
                 }
 
-                double precio = Double.valueOf(JOptionPane.showInputDialog(null,
-                        "Ingrese el precio del Zapato Casual " + (almacen + 1) + ":",
-                        "00"));
+                double precio;
+                while (true) {
+                    try {
+                        precio = Double.valueOf(JOptionPane.showInputDialog(null,
+                                "Ingrese el precio del Zapato Casual " + (almacen + 1) + ":",
+                                "00"));
+                        break;
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Ingrese un número", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
 
                 String color = JOptionPane.showInputDialog(null,
                         "Ingrese el color del Zapato Casual " + (almacen + 1) + ":",
@@ -101,9 +123,17 @@ public class CasualMethod {
                     throw new NullPointerException();
                 }
 
-                double talla = Double.valueOf(JOptionPane.showInputDialog(null,
-                        "Ingrese la talla del Zapato Casual " + (almacen + 1) + ":",
-                        "00"));
+                double talla;
+                while (true) {
+                    try {
+                        talla = Double.valueOf(JOptionPane.showInputDialog(null,
+                                "Ingrese la talla del Zapato Casual " + (almacen + 1) + ":",
+                                "00"));
+                        break;
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Ingrese un número", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
 
                 String material = JOptionPane.showInputDialog(null,
                         "Ingrese el material del Zapato Casual " + (almacen + 1) + ":",
