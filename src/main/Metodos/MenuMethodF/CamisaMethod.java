@@ -42,7 +42,9 @@ public class CamisaMethod {
                 }
 
             }catch(Exception e){
-                JOptionPane.showMessageDialog(null,"Ups! Error!");
+                JOptionPane.showMessageDialog(null,
+                "Ups! Error!",
+                "CAMISA MENU", JOptionPane.WARNING_MESSAGE);
             }
         }while(selectCamisa != 2);
     }

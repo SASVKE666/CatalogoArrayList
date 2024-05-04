@@ -59,14 +59,17 @@ public class ElMethod {
                 }
 
             }catch(Exception e){
-                JOptionPane.showMessageDialog(null,"Ups! Error!");
+                JOptionPane.showMessageDialog(null,
+                "Ups! Error!",
+                "Camisa El Menu", JOptionPane.WARNING_MESSAGE);
             }
         }while(selectCamisa != 5);
     }
 
     public static void inputCamisaEl(){
 
-        int count = Integer.valueOf(JOptionPane.showInputDialog(
+        try{
+            int count = Integer.valueOf(JOptionPane.showInputDialog(
             "Cuantas camisas para el desea ingresar?",
             "01"));
 
@@ -112,11 +115,16 @@ public class ElMethod {
 
             almacen ++;
         }
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ingreso Cancelado",
+                    "Ingresar Camisa El", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     public static void eraseCamisaEl(){
 
-        int codeToErase = Integer.valueOf(
+        try{
+            int codeToErase = Integer.valueOf(
             JOptionPane.showInputDialog(
                 "Ingrese el codigo de la Camisa El a eliminar"
             )
@@ -171,12 +179,17 @@ public class ElMethod {
             "Búsqueda Fallida", 
             JOptionPane.WARNING_MESSAGE
         );
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Eliminar Cancelado",
+                    "Eliminar Camisa El", JOptionPane.WARNING_MESSAGE);
+        }
 
     }
 
     public static void findCamisaEl(){
 
-        int codigoFind = Integer.valueOf(JOptionPane.showInputDialog(
+        try{
+            int codigoFind = Integer.valueOf(JOptionPane.showInputDialog(
                 "Ingrese el código del Producto", 
                 "000"));
         El elFind = new El(codigoFind);
@@ -193,12 +206,18 @@ public class ElMethod {
         JOptionPane.showMessageDialog(null, 
         "La Camisa para El con código " + codigoFind + " no ha sido encontrado.", 
         "Búsqueda Fallida", JOptionPane.WARNING_MESSAGE);
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Busqueda Cancelada",
+                    "Buscar Camisa El", JOptionPane.WARNING_MESSAGE);
+        }
+
 
     } 
 
     public static void printCamisaEl(){
 
-        StringBuilder sb = new StringBuilder();
+        try{
+            StringBuilder sb = new StringBuilder();
 
         sb.append("Lista de Cammisas para El:\n");
 
@@ -210,11 +229,16 @@ public class ElMethod {
 
         JOptionPane.showMessageDialog(null, sb.toString(), 
         "Camisas El", JOptionPane.INFORMATION_MESSAGE);
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Lista Cancelada",
+                    "Lista Camisa El", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     public static void editCamisaEl(){
 
-        Integer codeToEdit = Integer.valueOf(
+        try{
+            Integer codeToEdit = Integer.valueOf(
             JOptionPane.showInputDialog(
                 "Ingrese el codigo de la Camisa El que va a cambiar"
             )
@@ -304,6 +328,11 @@ public class ElMethod {
         codeToEdit + " no ha sido encontrado.", 
         "Busqueda Fallida", 
         JOptionPane.WARNING_MESSAGE);
+
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Edicion Cancelada",
+                    "Editar Camisa El", JOptionPane.WARNING_MESSAGE);
+        }
 
     }
 }

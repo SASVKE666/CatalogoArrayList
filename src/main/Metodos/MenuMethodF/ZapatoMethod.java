@@ -44,7 +44,7 @@ public class ZapatoMethod{
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null,
                 "Ups! Error!", 
-                "ZAPATO", JOptionPane.WARNING_MESSAGE);
+                "ZAPATO MENU", JOptionPane.WARNING_MESSAGE);
             }
         }while(selectZapato != 2);
     }
