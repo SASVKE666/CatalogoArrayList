@@ -1,26 +1,49 @@
 package main.Metodos.MenuMethodF.ZapatoMethodF;
 
+//  importar libreria java.util.ArrayList para arreglos
+//  importar libreria javax.swing.JOptionPane para uso de cajas de texto, ingreso de datos y cajas de opciones
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+//  importar clase Casual para su uso en los arreglos
+//  importar clase ZapatoMethod para uso del metodo zapato()
 import main.Clases.Products.ZapatoF.Casual;
 import main.Metodos.MenuMethodF.ZapatoMethod;
 
 public class CasualMethod {
-
-    static int selectZapato = 0;
 
     static ArrayList<Casual> casualArray = new ArrayList<>();
 
     static int almacen = 0;
 
     public static void zapatoCasual() {
+
+        // variable Integer para usar en el arreglo de Object[] y en el Do While
+        Integer selectZapato = 0;
+
+        // Do while para que se mantenga en selectZapato
         do {
             // Try catch para evitar que el programa termine si hay un error
             try {
+                // Se crea un array de tipo Object que contiene las opciones que se mostrarán al
+                // usuario en el cuadro de diálogo.
                 Object[] options = { "Insertar", "Borrar", "Buscar", "Imprimir", "Editar", "Regresar" };
-
+                /*
+                 * "Seleccione una opción:": Es el mensaje que se muestra en el cuadro de
+                 * diálogo.
+                 * "Zapato Tenis Menu": Es el título del cuadro de diálogo.
+                 * JOptionPane.DEFAULT_OPTION: Es el tipo de opciones por defecto que se
+                 * mostrarán.
+                 * JOptionPane.INFORMATION_MESSAGE: Es el ícono que se muestra en el cuadro de
+                 * diálogo.
+                 * null: Es el ícono personalizado que se puede mostrar en el cuadro de diálogo
+                 * (en este caso no se utiliza).
+                 * options: Es el array de opciones que se mostrarán al usuario.
+                 * options[0]: Es la opción por defecto seleccionada al abrir el cuadro de
+                 * diálogo.
+                 * El resultado de la selección se guarda en la variable selectZapato.
+                 */
                 selectZapato = JOptionPane.showOptionDialog(null,
                         "Seleccione una opción:",
                         "Zapato Tenis Menu",
@@ -30,12 +53,26 @@ public class CasualMethod {
                         options,
                         options[0]);
 
+                // Se inicia una estructura switch que evalúa la variable selectZapato.
                 switch (selectZapato) {
+                    /*
+                     * En caso de que selectZapato sea igual a 0, se ejecuta el bloque de código a
+                     * continuación.
+                     */
                     case 0:
+                        /*
+                         * Llama al método inputZapatoCasual() que se encarga de manejar la opción de
+                         * "Insertar" un zapato casual.
+                         */
                         inputZapatoCasual();
+                        /* Rompe la ejecución del switch y continúa con el código después del switch. */
                         break;
 
                     case 1:
+                        /*
+                         * Llama al método eraseZapatoCasual() que se encarga de manejar la opción de
+                         * "Borrar" un zapato casual.
+                         */
                         eraseZapatoCasual();
                         break;
 
@@ -52,47 +89,100 @@ public class CasualMethod {
                         break;
 
                     case 5:
+                        /* Llama al método zapato() de la clase ZapatoMethod. */
                         ZapatoMethod.zapato();
+                        /* Sale del método actual y no ejecuta más código. */
                         return;
 
                 }
 
+                /*
+                 * Se inicia un bloque catch para capturar cualquier excepción que pueda ocurrir
+                 * dentro del switch.
+                 */
             } catch (Exception e) {
+                /*
+                 * Muestra un mensaje de error en un cuadro de diálogo en caso de que se
+                 * produzca una excepción.
+                 */
                 JOptionPane.showMessageDialog(null,
                         "Ups! Error!",
                         "Zapato Casual Menu",
                         JOptionPane.ERROR_MESSAGE);
             }
 
+            /*
+             * Se realiza un bucle do-while que continuará ejecutando el código dentro del
+             * bucle mientras selectZapato sea diferente de 5.
+             * 
+             * En el caso 5 que es igual a "Regresar" el do-while termina y abre al metodo
+             * zapato() de la clase ZapatoMethod
+             */
         } while (selectZapato != 5);
     }
 
+    // Se define un método público y estático llamado inputZapatoCasual que no
+    // devuelve ningún valor (void).
     public static void inputZapatoCasual() {
 
+        // Se inicia un bloque try para manejar excepciones dentro del método
+        // inputZapatoCasual.
         try {
 
+            // Se declara la variable count de tipo entero para almacenar la cantidad de
+            // zapatos casuales que el usuario desea ingresar.
             int count;
+
+            // Se inicia un bucle while que se ejecutará indefinidamente hasta que se rompa
+            // explícitamente con break.
             while (true) {
+
                 try {
-                    count = Integer.valueOf(JOptionPane.showInputDialog(null,
+
+                    // Muestra un cuadro de diálogo de entrada para que el usuario ingrese la
+                    // cantidad de zapatos casuales que desea ingresar.
+                    String input = JOptionPane.showInputDialog(null,
                             "¿Cuántos zapatos casuales desea ingresar? ",
-                            "01"));
+                            "01");
+
+                    // Verifica si el usuario ha presionado "Cancelar" en el cuadro de diálogo de
+                    // entrada.
+                    if (input == null) {
+                        // Muestra un mensaje de advertencia si el usuario ha cancelado la operación.
+                        JOptionPane.showMessageDialog(null, "Ingreso Cancelado", "Ingresar Zapato Casual",
+                                JOptionPane.WARNING_MESSAGE);
+                        // Sale del método inputZapatoCasual si el usuario ha cancelado la operación.
+                        return;
+                    }
+
+                    // Convierte la entrada del usuario a un entero y lo asigna a la variable count.
+                    count = Integer.valueOf(input);
+                    // Rompe el bucle while una vez que se ha obtenido un valor válido para count.
                     break;
+
+                    /*
+                     * Se inicia un bloque catch que captura la excepción NumberFormatException, la
+                     * cual se produce cuando se intenta convertir una cadena a un número, pero la
+                     * cadena no tiene el formato numérico correcto.
+                     */
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(null, "Ingrese un número", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
-            /*
-             * int count = Integer.valueOf(JOptionPane.showInputDialog(
-             * "¿Cuántos zapatos casuales desea ingresar?",
-             * "01"));
-             */
 
+            /*
+             * Se inicia un bucle for que se ejecutará count veces. Este bucle se encarga de
+             * solicitar información sobre cada zapato casual que el usuario desea ingresar.
+             */
             for (int i = 0; i < count; i++) {
 
+                // (almacen + 1): Incrementa el valor de almacen en 1 para mostrar el número del
+                // zapato casual actual.
                 String nombre = JOptionPane.showInputDialog(null,
                         "Ingrese el nombre del Zapato Casual " + (almacen + 1) + ":",
                         "NOMBRE");
+                // Verifica si el usuario ha presionado "Cancelar" en el cuadro de diálogo de
+                // entrada y lanza una excepción NullPointerException si es así.
                 if (nombre == null) {
                     throw new NullPointerException();
                 }
@@ -161,6 +251,8 @@ public class CasualMethod {
 
                 almacen++;
             }
+            // catch of the first try, if a general error is found in the method it will
+            // release the warning
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ingreso Cancelado",
                     "Ingresar Zapato Casual", JOptionPane.WARNING_MESSAGE);
@@ -171,9 +263,29 @@ public class CasualMethod {
     public static void eraseZapatoCasual() {
 
         try {
-            int codeToErase = Integer.valueOf(
-                    JOptionPane.showInputDialog(
-                            "Ingrese el codigo del Zapato Casual a eliminar"));
+
+            int codeToErase;
+
+            while (true) {
+                try {
+                    String input = JOptionPane.showInputDialog(null,
+                            "Ingrese el codigo del Zapato Casual a eliminar",
+                            "000");
+
+                    if (input == null) {
+                        JOptionPane.showMessageDialog(null, "Eliminacion Cancelada", "Eliminar Zapato Casual",
+                                JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+
+                    codeToErase = Integer.valueOf(input);
+                    break;
+
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Ingrese un número",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
 
             Casual zapatoErase = new Casual(codeToErase);
 
@@ -231,9 +343,26 @@ public class CasualMethod {
     public static void findZapatoCasual() {
 
         try {
-            int codigoFind = Integer.valueOf(JOptionPane.showInputDialog(
-                    "Ingrese el código del Producto",
-                    "000"));
+            int codigoFind;
+            while(true){
+                try{
+                    String input = JOptionPane.showInputDialog(
+                        "Ingrese el código del Producto",
+                        "000");
+
+                    if(input == null){
+                        JOptionPane.showMessageDialog(null, "Busqueda Cancelada", "Buscar Zapato Casual",
+                                JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                    codigoFind = Integer.valueOf(input);
+                    break;
+                }catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(null, "Ingrese un número",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
             Casual zapatoFind = new Casual(codigoFind);
 
             for (Casual casual : casualArray) {
@@ -281,9 +410,26 @@ public class CasualMethod {
     public static void editZapatoCasual() {
 
         try {
-            Integer codeToEdit = Integer.valueOf(
-                    JOptionPane.showInputDialog(
-                            "Ingrese el codigo del Zapato Casual que va a cambiar"));
+
+            Integer codeToEdit;
+            while(true){
+                try{
+                    String input = JOptionPane.showInputDialog(
+                        "Ingrese el codigo del Zapato Casual que va a cambiar",
+                        "000");
+
+                    if(input == null){
+                        JOptionPane.showMessageDialog(null, "Edicion Cancelada", "Editar Zapato Casual",
+                                JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                    codeToEdit = Integer.valueOf(input);
+                    break;
+                }catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(null, "Ingrese un número",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
 
             Casual zapatoFind = new Casual(codeToEdit);
 
