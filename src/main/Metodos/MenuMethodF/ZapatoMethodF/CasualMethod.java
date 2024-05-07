@@ -131,7 +131,7 @@ public class CasualMethod {
 
             // Se declara la variable count de tipo entero para almacenar la cantidad de
             // zapatos casuales que el usuario desea ingresar.
-            int count;
+            int count = 1;
 
             // Se inicia un bucle while que se ejecutará indefinidamente hasta que se rompa
             // explícitamente con break.
@@ -157,8 +157,18 @@ public class CasualMethod {
 
                     // Convierte la entrada del usuario a un entero y lo asigna a la variable count.
                     count = Integer.valueOf(input);
-                    // Rompe el bucle while una vez que se ha obtenido un valor válido para count.
-                    break;
+
+                    if (count < 0) {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Debe ingresar obligatoriamente un número entero.",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
+
+                    } else {
+                        // Rompe el bucle while una vez que se ha obtenido un valor válido para count.
+                        break;
+                    }
 
                     /*
                      * Se inicia un bloque catch que captura la excepción NumberFormatException, la
@@ -166,8 +176,13 @@ public class CasualMethod {
                      * cadena no tiene el formato numérico correcto.
                      */
                 } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(null, "Ingrese un número", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Debe ingresar obligatoriamente un número entero.",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
                 }
+
             }
 
             /*
@@ -279,7 +294,17 @@ public class CasualMethod {
                     }
 
                     codeToErase = Integer.valueOf(input);
-                    break;
+                    if (codeToErase < 0) {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Debe ingresar obligatoriamente un número entero.",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
+
+                    } else {
+                        // Rompe el bucle while una vez que se ha obtenido un valor válido para count.
+                        break;
+                    }
 
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(null, "Ingrese un número",
@@ -344,20 +369,20 @@ public class CasualMethod {
 
         try {
             int codigoFind;
-            while(true){
-                try{
+            while (true) {
+                try {
                     String input = JOptionPane.showInputDialog(
-                        "Ingrese el código del Producto",
-                        "000");
+                            "Ingrese el código del Producto",
+                            "000");
 
-                    if(input == null){
+                    if (input == null) {
                         JOptionPane.showMessageDialog(null, "Busqueda Cancelada", "Buscar Zapato Casual",
                                 JOptionPane.WARNING_MESSAGE);
                         return;
                     }
                     codigoFind = Integer.valueOf(input);
                     break;
-                }catch(NumberFormatException e){
+                } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(null, "Ingrese un número",
                             "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -412,20 +437,32 @@ public class CasualMethod {
         try {
 
             Integer codeToEdit;
-            while(true){
-                try{
+            while (true) {
+                try {
                     String input = JOptionPane.showInputDialog(
-                        "Ingrese el codigo del Zapato Casual que va a cambiar",
-                        "000");
+                            "Ingrese el codigo del Zapato Casual que va a cambiar",
+                            "000");
 
-                    if(input == null){
+                    if (input == null) {
                         JOptionPane.showMessageDialog(null, "Edicion Cancelada", "Editar Zapato Casual",
                                 JOptionPane.WARNING_MESSAGE);
                         return;
                     }
                     codeToEdit = Integer.valueOf(input);
-                    break;
-                }catch(NumberFormatException e){
+
+                    if (codeToEdit < 0) {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Debe ingresar obligatoriamente un número entero.",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
+
+                    } else {
+                        // Rompe el bucle while una vez que se ha obtenido un valor válido para count.
+                        break;
+                    }
+
+                } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(null, "Ingrese un número",
                             "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -459,30 +496,65 @@ public class CasualMethod {
                         String nombre = JOptionPane.showInputDialog(null,
                                 "Ingrese el nombre del Zapato Casual " + (i + 1) + ":",
                                 "NOMBRE");
+                        // Verifica si el usuario ha presionado "Cancelar" en el cuadro de diálogo de
+                        // entrada y lanza una excepción NullPointerException si es así.
+                        if (nombre == null) {
+                            throw new NullPointerException();
+                        }
 
-                        double precio = Double.valueOf(JOptionPane.showInputDialog(null,
-                                "Ingrese el precio del Zapato Casual " + (i + 1) + ":",
-                                "00"));
+                        double precio;
+                        while (true) {
+                            try {
+                                precio = Double.valueOf(JOptionPane.showInputDialog(null,
+                                        "Ingrese el precio del Zapato Casual " + (i + 1) + ":",
+                                        "00"));
+                                break;
+                            } catch (NumberFormatException e) {
+                                JOptionPane.showMessageDialog(null, "Ingrese un número", "Error",
+                                        JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
 
                         String color = JOptionPane.showInputDialog(null,
                                 "Ingrese el color del Zapato Casual " + (i + 1) + ":",
                                 "COLOR");
+                        if (color == null) {
+                            throw new NullPointerException();
+                        }
 
                         String marca = JOptionPane.showInputDialog(null,
                                 "Ingrese la marca del Zapato Casual " + (i + 1) + ":",
                                 "MARCA");
+                        if (marca == null) {
+                            throw new NullPointerException();
+                        }
 
-                        double talla = Double.valueOf(JOptionPane.showInputDialog(null,
-                                "Ingrese la talla del Zapato Casual " + (i + 1) + ":",
-                                "00"));
+                        double talla;
+                        while (true) {
+                            try {
+                                talla = Double.valueOf(JOptionPane.showInputDialog(null,
+                                        "Ingrese la talla del Zapato Casual " + (i + 1) + ":",
+                                        "00"));
+                                break;
+                            } catch (NumberFormatException e) {
+                                JOptionPane.showMessageDialog(null, "Ingrese un número", "Error",
+                                        JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
 
                         String material = JOptionPane.showInputDialog(null,
                                 "Ingrese el material del Zapato Casual " + (i + 1) + ":",
                                 "MATERIAL");
+                        if (material == null) {
+                            throw new NullPointerException();
+                        }
 
                         String categoria = JOptionPane.showInputDialog(null,
                                 "Ingrese la categoría del Zapato Casual " + (i + 1) + ":",
                                 "CATEGORÍA");
+                        if (categoria == null) {
+                            throw new NullPointerException();
+                        }
 
                         currentProduct.setNombre(nombre);
                         currentProduct.setPrecio(precio);
