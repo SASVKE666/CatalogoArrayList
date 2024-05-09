@@ -360,9 +360,7 @@ public class OtrosMethod {
         public static void editPantalonOtros() {
 
                 try {
-                        Integer codeToEdit = Integer.valueOf(
-                                        JOptionPane.showInputDialog(
-                                                        "Ingrese el codigo del Pantalon Otros que va a cambiar"));
+                        Integer codeToEdit ;
                         while (true) {
                                 try {
                                         String input = JOptionPane.showInputDialog(
