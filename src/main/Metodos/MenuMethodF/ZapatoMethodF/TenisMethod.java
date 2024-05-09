@@ -81,7 +81,7 @@ public class TenisMethod {
                                                 JOptionPane.showMessageDialog(
                                                                 null,
                                                                 "Ingreso Cancelado",
-                                                                "Ingresar Zapato Casual",
+                                                                "Ingresar Zapato Tenis",
                                                                 JOptionPane.WARNING_MESSAGE);
                                                 return;
                                         }
@@ -495,9 +495,6 @@ public class TenisMethod {
                                                         throw new NullPointerException();
                                                 }
 
-                                                Tenis newProduct = new Tenis(nombre,
-                                                                precio, color, marca, talla, material, deporte);
-
                                                 currentProduct.setNombre(nombre);
                                                 currentProduct.setPrecio(precio);
                                                 currentProduct.setColor(color);
@@ -510,7 +507,7 @@ public class TenisMethod {
                                                 JOptionPane.showMessageDialog(
                                                                 null,
                                                                 "Zapato Tenis actualizado: \n" +
-                                                                                newProduct.toString(),
+                                                                currentProduct.toString(),
                                                                 "Actualizacion Exitosa",
                                                                 JOptionPane.INFORMATION_MESSAGE);
 

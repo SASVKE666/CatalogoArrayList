@@ -464,8 +464,7 @@ public class EllaMethod {
                                                 if (estilo == null) {
                                                         throw new NullPointerException();
                                                 }
-                                                Ella nuevoElla = new Ella(nombre,
-                                                                precio, color, marca, talla, tela, estilo);
+                                     
 
                                                 currentProduct.setNombre(nombre);
                                                 currentProduct.setPrecio(precio);
@@ -480,7 +479,7 @@ public class EllaMethod {
                                                 JOptionPane.showMessageDialog(
                                                                 null,
                                                                 "Camisa Ella actualizada: \n" +
-                                                                                nuevoElla.toString(),
+                                                                currentProduct.toString(),
                                                                 "Actualizacion exitosa",
                                                                 JOptionPane.INFORMATION_MESSAGE);
 

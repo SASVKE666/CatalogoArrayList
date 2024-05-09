@@ -490,9 +490,7 @@ public class OtrosMethod {
                                                 if (estilo == null) {
                                                         throw new NullPointerException();
                                                 }
-                                                Otros newProduct = new Otros(nombre,
-                                                                precio, color, marca, talla, tela, estilo);
-
+        
                                                 currentProduct.setNombre(nombre);
                                                 currentProduct.setPrecio(precio);
                                                 currentProduct.setColor(color);
@@ -504,7 +502,7 @@ public class OtrosMethod {
                                                 JOptionPane.showMessageDialog(
                                                                 null,
                                                                 "Pantalón Otros actualizado: \n"
-                                                                                + newProduct.toString(),
+                                                                                + currentProduct.toString(),
                                                                 "Actualización exitosa",
                                                                 JOptionPane.INFORMATION_MESSAGE);
 
