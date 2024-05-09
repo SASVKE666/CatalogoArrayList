@@ -131,7 +131,7 @@ public class CasualMethod {
 
             // Se declara la variable count de tipo entero para almacenar la cantidad de
             // zapatos casuales que el usuario desea ingresar.
-            int count = 1;
+            int count;
 
             // Se inicia un bucle while que se ejecutará indefinidamente hasta que se rompa
             // explícitamente con break.
@@ -376,12 +376,23 @@ public class CasualMethod {
                             "000");
 
                     if (input == null) {
-                        JOptionPane.showMessageDialog(null, "Busqueda Cancelada", "Buscar Zapato Casual",
+                        JOptionPane.showMessageDialog(null, "Busqueda Cancelada", "Buscar Producto",
                                 JOptionPane.WARNING_MESSAGE);
                         return;
                     }
                     codigoFind = Integer.valueOf(input);
-                    break;
+                    if (codigoFind < 0) {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Debe ingresar obligatoriamente un número entero.",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
+
+                    } else {
+                        // Rompe el bucle while una vez que se ha obtenido un valor válido para
+                        // count.
+                        break;
+                    }
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(null, "Ingrese un número",
                             "Error", JOptionPane.ERROR_MESSAGE);

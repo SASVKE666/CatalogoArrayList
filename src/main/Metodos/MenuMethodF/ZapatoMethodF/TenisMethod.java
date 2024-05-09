@@ -88,13 +88,25 @@ public class TenisMethod {
 
                                         count = Integer.valueOf(input);
 
-                                        break;
+                                        if (count < 0) {
+                                                JOptionPane.showMessageDialog(
+                                                                null,
+                                                                "Debe ingresar obligatoriamente un número entero.",
+                                                                "Error",
+                                                                JOptionPane.ERROR_MESSAGE);
+
+                                        } else {
+                                                // Rompe el bucle while una vez que se ha obtenido un valor válido para
+                                                // count.
+                                                break;
+                                        }
                                 } catch (NumberFormatException e) {
                                         JOptionPane.showMessageDialog(null, "Ingrese un número", "Error",
                                                         JOptionPane.ERROR_MESSAGE);
 
                                 }
                         }
+
                         for (int i = 0; i < count; i++) {
 
                                 String nombre = JOptionPane.showInputDialog(null,
@@ -150,16 +162,16 @@ public class TenisMethod {
                                 String material = JOptionPane.showInputDialog(null,
                                                 "Ingrese el material del Zapato Tenis " + (almacen + 1) + ":",
                                                 "MATERIAL");
-                                                if (material == null) {
-                                                        throw new NullPointerException();
-                                                    }
+                                if (material == null) {
+                                        throw new NullPointerException();
+                                }
 
                                 String deporte = JOptionPane.showInputDialog(null,
                                                 "Ingrese el deporte del Zapato Tenis " + (almacen + 1) + ":",
                                                 "DEPORTE");
-                                                if (deporte == null) {
-                                                        throw new NullPointerException();
-                                                    }
+                                if (deporte == null) {
+                                        throw new NullPointerException();
+                                }
 
                                 Tenis nuevoTenis = new Tenis(nombre,
                                                 precio, color, marca, talla, material, deporte);
@@ -183,10 +195,40 @@ public class TenisMethod {
         public static void eraseZapatotenis() {
 
                 try {
-                        int codeToErase = Integer.valueOf(
-                                        JOptionPane.showInputDialog(
-                                                        "Ingrese el codigo del Zapato Tenis a eliminar"));
+                        int codeToErase;
 
+                        while (true) {
+                                try {
+                                        String input = JOptionPane.showInputDialog(null,
+                                                        "Ingrese el codigo del Zapato Tenis a eliminar",
+                                                        "000");
+
+                                        if (input == null) {
+                                                JOptionPane.showMessageDialog(null, "Eliminacion Cancelada",
+                                                                "Eliminar Zapato Casual",
+                                                                JOptionPane.WARNING_MESSAGE);
+                                                return;
+                                        }
+
+                                        codeToErase = Integer.valueOf(input);
+                                        if (codeToErase < 0) {
+                                                JOptionPane.showMessageDialog(
+                                                                null,
+                                                                "Debe ingresar obligatoriamente un número entero.",
+                                                                "Error",
+                                                                JOptionPane.ERROR_MESSAGE);
+
+                                        } else {
+                                                // Rompe el bucle while una vez que se ha obtenido un valor válido para
+                                                // count.
+                                                break;
+                                        }
+
+                                } catch (NumberFormatException e) {
+                                        JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                        "Error", JOptionPane.ERROR_MESSAGE);
+                                }
+                        }
                         Tenis tenisErase = new Tenis(codeToErase);
 
                         for (int i = 0; i < tenisArray.size(); i++) {
@@ -242,9 +284,37 @@ public class TenisMethod {
         public static void findZapatoTenis() {
 
                 try {
-                        int codigoFind = Integer.valueOf(JOptionPane.showInputDialog(
-                                        "Ingrese el código del Producto",
-                                        "000"));
+                        int codigoFind;
+                        while (true) {
+                                try {
+                                        String input = JOptionPane.showInputDialog(
+                                                        "Ingrese el código del Producto",
+                                                        "000");
+
+                                        if (input == null) {
+                                                JOptionPane.showMessageDialog(null, "Busqueda Cancelada",
+                                                                "Buscar Zapato Casual",
+                                                                JOptionPane.WARNING_MESSAGE);
+                                                return;
+                                        }
+                                        codigoFind = Integer.valueOf(input);
+                                        if (codigoFind < 0) {
+                                                JOptionPane.showMessageDialog(
+                                                        null,
+                                                        "Debe ingresar obligatoriamente un número entero.",
+                                                        "Error",
+                                                        JOptionPane.ERROR_MESSAGE);
+                        
+                                            } else {
+                                                // Rompe el bucle while una vez que se ha obtenido un valor válido para
+                                                // count.
+                                                break;
+                                            }
+                                } catch (NumberFormatException e) {
+                                        JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                        "Error", JOptionPane.ERROR_MESSAGE);
+                                }
+                        }
                         Tenis tenisFind = new Tenis(codigoFind);
 
                         for (Tenis tenis : tenisArray) {
@@ -291,9 +361,39 @@ public class TenisMethod {
         public static void editZapatoTenis() {
 
                 try {
-                        Integer codeToEdit = Integer.valueOf(
-                                        JOptionPane.showInputDialog(
-                                                        "Ingrese el codigo del Zapato Casual que va a cambiar"));
+                        Integer codeToEdit;
+                        while (true) {
+                                try {
+                                        String input = JOptionPane.showInputDialog(
+                                                        "Ingrese el codigo del Zapato Teni que va a cambiar",
+                                                        "000");
+
+                                        if (input == null) {
+                                                JOptionPane.showMessageDialog(null, "Edicion Cancelada",
+                                                                "Editar Zapato Casual",
+                                                                JOptionPane.WARNING_MESSAGE);
+                                                return;
+                                        }
+                                        codeToEdit = Integer.valueOf(input);
+
+                                        if (codeToEdit < 0) {
+                                                JOptionPane.showMessageDialog(
+                                                                null,
+                                                                "Debe ingresar obligatoriamente un número entero.",
+                                                                "Error",
+                                                                JOptionPane.ERROR_MESSAGE);
+
+                                        } else {
+                                                // Rompe el bucle while una vez que se ha obtenido un valor válido para
+                                                // count.
+                                                break;
+                                        }
+
+                                } catch (NumberFormatException e) {
+                                        JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                        "Error", JOptionPane.ERROR_MESSAGE);
+                                }
+                        }
 
                         Tenis tenisFind = new Tenis(codeToEdit);
 
@@ -322,32 +422,78 @@ public class TenisMethod {
                                         if (confirmacion == JOptionPane.YES_OPTION) {
 
                                                 String nombre = JOptionPane.showInputDialog(null,
-                                                                "Ingrese el nombre del Zapato Tenis " + (i + 1) + ":",
+                                                                "Ingrese el nombre del Zapato Tenis " + (almacen + 1)
+                                                                                + ":",
                                                                 "NOMBRE");
 
-                                                double precio = Double.valueOf(JOptionPane.showInputDialog(null,
-                                                                "Ingrese el precio del Zapato Tenis " + (i + 1) + ":",
-                                                                "00"));
+                                                if (nombre == null) {
+                                                        throw new NullPointerException();
+                                                }
+
+                                                double precio;
+                                                while (true) {
+                                                        try {
+                                                                precio = Double.valueOf(JOptionPane.showInputDialog(
+                                                                                null,
+                                                                                "Ingrese el precio del Zapato Tenis "
+                                                                                                + (almacen + 1)
+                                                                                                + ":",
+                                                                                "00"));
+                                                                break;
+                                                        } catch (NumberFormatException e) {
+                                                                JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                                "Error",
+                                                                                JOptionPane.ERROR_MESSAGE);
+                                                        }
+                                                }
 
                                                 String color = JOptionPane.showInputDialog(null,
-                                                                "Ingrese el color del Zapato Tenis " + (i + 1) + ":",
+                                                                "Ingrese el color del Zapato Tenis " + (almacen + 1)
+                                                                                + ":",
                                                                 "COLOR");
+                                                if (color == null) {
+                                                        throw new NullPointerException();
+                                                }
 
                                                 String marca = JOptionPane.showInputDialog(null,
-                                                                "Ingrese la marca del Zapato Tenis " + (i + 1) + ":",
+                                                                "Ingrese la marca del Zapato Tenis " + (almacen + 1)
+                                                                                + ":",
                                                                 "MARCA");
+                                                if (marca == null) {
+                                                        throw new NullPointerException();
+                                                }
 
-                                                double talla = Double.valueOf(JOptionPane.showInputDialog(null,
-                                                                "Ingrese la talla del Zapato Tenis " + (i + 1) + ":",
-                                                                "00"));
+                                                double talla;
+                                                while (true) {
+                                                        try {
+                                                                talla = Double.valueOf(JOptionPane.showInputDialog(null,
+                                                                                "Ingrese la talla del Zapato Tenis "
+                                                                                                + (almacen + 1)
+                                                                                                + ":",
+                                                                                "00"));
+                                                                break;
+                                                        } catch (NumberFormatException e) {
+                                                                JOptionPane.showMessageDialog(null, "Ingrese un número",
+                                                                                "Error",
+                                                                                JOptionPane.ERROR_MESSAGE);
+                                                        }
+                                                }
 
                                                 String material = JOptionPane.showInputDialog(null,
-                                                                "Ingrese el material del Zapato Tenis " + (i + 1) + ":",
+                                                                "Ingrese el material del Zapato Tenis " + (almacen + 1)
+                                                                                + ":",
                                                                 "MATERIAL");
+                                                if (material == null) {
+                                                        throw new NullPointerException();
+                                                }
 
                                                 String deporte = JOptionPane.showInputDialog(null,
-                                                                "Ingrese el deporte del Zapato Tenis " + (i + 1) + ":",
+                                                                "Ingrese el deporte del Zapato Tenis " + (almacen + 1)
+                                                                                + ":",
                                                                 "DEPORTE");
+                                                if (deporte == null) {
+                                                        throw new NullPointerException();
+                                                }
 
                                                 Tenis newProduct = new Tenis(nombre,
                                                                 precio, color, marca, talla, material, deporte);
