@@ -158,7 +158,7 @@ public class CasualMethod {
                     // Convierte la entrada del usuario a un entero y lo asigna a la variable count.
                     count = Integer.valueOf(input);
 
-                    if (count < 0) {
+                    if (count <= 0) {
                         JOptionPane.showMessageDialog(
                                 null,
                                 "Debe ingresar obligatoriamente un número entero.",
@@ -294,7 +294,7 @@ public class CasualMethod {
                     }
 
                     codeToErase = Integer.valueOf(input);
-                    if (codeToErase < 0) {
+                    if (codeToErase <= 0) {
                         JOptionPane.showMessageDialog(
                                 null,
                                 "Debe ingresar obligatoriamente un número entero.",
@@ -381,7 +381,7 @@ public class CasualMethod {
                         return;
                     }
                     codigoFind = Integer.valueOf(input);
-                    if (codigoFind < 0) {
+                    if (codigoFind <= 0) {
                         JOptionPane.showMessageDialog(
                                 null,
                                 "Debe ingresar obligatoriamente un número entero.",
@@ -461,7 +461,7 @@ public class CasualMethod {
                     }
                     codeToEdit = Integer.valueOf(input);
 
-                    if (codeToEdit < 0) {
+                    if (codeToEdit <= 0) {
                         JOptionPane.showMessageDialog(
                                 null,
                                 "Debe ingresar obligatoriamente un número entero.",

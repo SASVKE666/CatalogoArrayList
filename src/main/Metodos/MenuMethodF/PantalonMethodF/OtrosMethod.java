@@ -89,7 +89,7 @@ public class OtrosMethod {
 
                                         count = Integer.valueOf(input);
 
-                                        if (count < 0) {
+                                        if (count <= 0) {
                                                 JOptionPane.showMessageDialog(
                                                                 null,
                                                                 "Debe ingresar obligatoriamente un número entero.",
@@ -208,7 +208,7 @@ public class OtrosMethod {
                                         }
 
                                         codeToErase = Integer.valueOf(input);
-                                        if (codeToErase < 0) {
+                                        if (codeToErase <= 0) {
                                                 JOptionPane.showMessageDialog(
                                                                 null,
                                                                 "Debe ingresar obligatoriamente un número entero.",
@@ -296,7 +296,7 @@ public class OtrosMethod {
                                                 return;
                                         }
                                         codigoFind = Integer.valueOf(input);
-                                        if (codigoFind < 0) {
+                                        if (codigoFind <= 0) {
                                                 JOptionPane.showMessageDialog(
                                                                 null,
                                                                 "Debe ingresar obligatoriamente un número entero.",
@@ -377,7 +377,7 @@ public class OtrosMethod {
                                         }
                                         codeToEdit = Integer.valueOf(input);
 
-                                        if (codeToEdit < 0) {
+                                        if (codeToEdit <= 0) {
                                                 JOptionPane.showMessageDialog(
                                                                 null,
                                                                 "Debe ingresar obligatoriamente un número entero.",

@@ -96,7 +96,7 @@ public class JeansMethod {
                                         // Convierte la entrada del usuario a un entero y lo asigna a la variable count.
                                         count = Integer.valueOf(input);
 
-                                        if (count < 0) {
+                                        if (count <= 0) {
                                                 JOptionPane.showMessageDialog(
                                                                 null,
                                                                 "Debe ingresar obligatoriamente un número entero.",
@@ -220,7 +220,7 @@ public class JeansMethod {
                                         }
 
                                         codeToErase = Integer.valueOf(input);
-                                        if (codeToErase < 0) {
+                                        if (codeToErase <= 0) {
                                                 JOptionPane.showMessageDialog(
                                                                 null,
                                                                 "Debe ingresar obligatoriamente un número entero.",
@@ -238,6 +238,7 @@ public class JeansMethod {
                                                         "Error", JOptionPane.ERROR_MESSAGE);
                                 }
                         }
+                        
                         Jeans jeansErase = new Jeans(codeToErase);
 
                         for (int i = 0; i < jeansArray.size(); i++) {
@@ -383,7 +384,7 @@ public class JeansMethod {
                                         }
                                         codeToEdit = Integer.valueOf(input);
 
-                                        if (codeToEdit < 0) {
+                                        if (codeToEdit <= 0) {
                                                 JOptionPane.showMessageDialog(
                                                                 null,
                                                                 "Debe ingresar obligatoriamente un número entero.",

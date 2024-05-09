@@ -85,7 +85,7 @@ public class ElMethod {
                     }
                     count = Integer.valueOf(input);
 
-                    if (count < 0) {
+                    if (count <= 0) {
                         JOptionPane.showMessageDialog(
                                 null,
                                 "Debe ingresar obligatoriamente un número entero.",
@@ -195,7 +195,7 @@ public class ElMethod {
                     }
 
                     codeToErase = Integer.valueOf(input);
-                    if (codeToErase < 0) {
+                    if (codeToErase <= 0) {
                         JOptionPane.showMessageDialog(
                                 null,
                                 "Debe ingresar obligatoriamente un número entero.",
@@ -284,7 +284,7 @@ public class ElMethod {
                         return;
                     }
                     codigoFind = Integer.valueOf(input);
-                    if (codigoFind < 0) {
+                    if (codigoFind <= 0) {
                         JOptionPane.showMessageDialog(
                                 null,
                                 "Debe ingresar obligatoriamente un número entero.",
@@ -361,7 +361,7 @@ public class ElMethod {
                     }
                     codeToEdit = Integer.valueOf(input);
 
-                    if (codeToEdit < 0) {
+                    if (codeToEdit <= 0) {
                         JOptionPane.showMessageDialog(
                                 null,
                                 "Debe ingresar obligatoriamente un número entero.",
