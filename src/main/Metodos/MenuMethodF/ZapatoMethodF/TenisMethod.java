@@ -1,5 +1,8 @@
 package main.Metodos.MenuMethodF.ZapatoMethodF;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -12,6 +15,10 @@ public class TenisMethod {
         static int selectZapato = 0;
 
         static int almacen = 0;
+
+            static File infoZapatoTenis;
+    static FileWriter escribir;
+    static PrintWriter imprimir;
 
         static ArrayList<Tenis> tenisArray = new ArrayList<>();
 
@@ -185,6 +192,29 @@ public class TenisMethod {
 
                                 almacen++;
                         }
+
+                        infoZapatoTenis = new File("infoZapatoTenis.txt");
+
+            if(!infoZapatoTenis.exists()){
+                infoZapatoTenis.createNewFile();
+            }
+            
+            escribir = new FileWriter(infoZapatoTenis, true);
+            
+            imprimir = new PrintWriter(escribir);
+
+            for (Tenis tenis : tenisArray) {
+                imprimir.println(tenis.getNombre());
+                imprimir.println(tenis.getPrecio());
+                imprimir.println(tenis.getColor());
+                imprimir.println(tenis.getMarca());
+                imprimir.println(tenis.getTalla());
+                imprimir.println(tenis.getMaterial());
+                imprimir.println(tenis.getDeporte());
+            }
+
+            imprimir.close();
+            escribir.close();
 
                 } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Ingreso Cancelado",

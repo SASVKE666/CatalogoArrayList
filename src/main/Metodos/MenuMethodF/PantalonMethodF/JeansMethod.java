@@ -1,5 +1,8 @@
 package main.Metodos.MenuMethodF.PantalonMethodF;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -14,6 +17,10 @@ public class JeansMethod {
         static ArrayList<Jeans> jeansArray = new ArrayList<>();
 
         static int almacen = 0;
+
+        static File infoPantalonJeans;
+    static FileWriter escribir;
+    static PrintWriter imprimir;
 
         public static void pantalonJeans() {
                 do {
@@ -196,6 +203,29 @@ public class JeansMethod {
                                 almacen++;
 
                         }
+                        infoPantalonJeans = new File("infoPantalonJeans.txt");
+
+            if(!infoPantalonJeans.exists()){
+                infoPantalonJeans.createNewFile();
+            }
+            
+            escribir = new FileWriter(infoPantalonJeans, true);
+            
+            imprimir = new PrintWriter(escribir);
+
+            for (Jeans jeans : jeansArray) {
+                imprimir.println(jeans.getNombre());
+                imprimir.println(jeans.getPrecio());
+                imprimir.println(jeans.getColor());
+                imprimir.println(jeans.getMarca());
+                imprimir.println(jeans.getTalla());
+                imprimir.println(jeans.getTela());
+                imprimir.println(jeans.getCorte());
+            }
+
+            imprimir.close();
+            escribir.close();
+            
                 } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Ingreso Cancelado",
                                         "Ingresar Pantalon Jeans", JOptionPane.WARNING_MESSAGE);

@@ -1,13 +1,16 @@
 package main.Metodos.MenuMethodF.ZapatoMethodF;
 
-//  importar libreria java.util.ArrayList para arreglos
-//  importar libreria javax.swing.JOptionPane para uso de cajas de texto, ingreso de datos y cajas de opciones
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+/* importar libreria java.util.ArrayList para arreglos
+importar libreria javax.swing.JOptionPane para uso de cajas de texto, ingreso de datos y cajas de opciones */
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-//  importar clase Casual para su uso en los arreglos
-//  importar clase ZapatoMethod para uso del metodo zapato()
+/* importar clase Casual para su uso en los arreglos
+importar clase ZapatoMethod para uso del metodo zapato() */
 import main.Clases.Products.ZapatoF.Casual;
 import main.Metodos.MenuMethodF.ZapatoMethod;
 
@@ -17,17 +20,35 @@ public class CasualMethod {
 
     static int almacen = 0;
 
+    /*
+     * variable estática tipo File. Esta variable representa un archivo en el
+     * sistema.
+     */
+    static File infoZapatoCasual;
+    /*
+     * variable estática tipo FileWriter. Variable se utilizará para escribir en el
+     * archivo.
+     */
+    static FileWriter escribir;
+    /*
+     * variable estática tipo PrintWriter. Variable se utilizará para imprimir texto
+     * en el archivo.
+     */
+    static PrintWriter imprimir;
+
     public static void zapatoCasual() {
 
-        // variable Integer para usar en el arreglo de Object[] y en el Do While
+        /* variable Integer para usar en el arreglo de Object[] y en el Do While */
         Integer selectZapato = 0;
 
-        // Do while para que se mantenga en selectZapato
+        /* Do while para que se mantenga en selectZapato */
         do {
-            // Try catch para evitar que el programa termine si hay un error
+            /* Try catch para evitar que el programa termine si hay un error */
             try {
-                // Se crea un array de tipo Object que contiene las opciones que se mostrarán al
-                // usuario en el cuadro de diálogo.
+                /*
+                 * Se crea un array de tipo Object que contiene las opciones que se mostrarán al
+                 * usuario en el cuadro de diálogo.
+                 */
                 Object[] options = { "Insertar", "Borrar", "Buscar", "Imprimir", "Editar", "Regresar" };
                 /*
                  * "Seleccione una opción:": Es el mensaje que se muestra en el cuadro de
@@ -53,7 +74,7 @@ public class CasualMethod {
                         options,
                         options[0]);
 
-                // Se inicia una estructura switch que evalúa la variable selectZapato.
+                /* Se inicia una estructura switch que evalúa la variable selectZapato. */
                 switch (selectZapato) {
                     /*
                      * En caso de que selectZapato sea igual a 0, se ejecuta el bloque de código a
@@ -121,41 +142,55 @@ public class CasualMethod {
         } while (selectZapato != 5);
     }
 
-    // Se define un método público y estático llamado inputZapatoCasual que no
-    // devuelve ningún valor (void).
+    /*
+     * Se define un método público y estático llamado inputZapatoCasual que no
+     * devuelve ningún valor (void).
+     */
     public static void inputZapatoCasual() {
 
-        // Se inicia un bloque try para manejar excepciones dentro del método
-        // inputZapatoCasual.
+        /*
+         * Se inicia un bloque try para manejar excepciones dentro del método
+         * inputZapatoCasual.
+         */
         try {
 
-            // Se declara la variable count de tipo entero para almacenar la cantidad de
-            // zapatos casuales que el usuario desea ingresar.
+            /*
+             * Se declara la variable count de tipo entero para almacenar la cantidad de
+             * zapatos casuales que el usuario desea ingresar.
+             */
             int count;
 
-            // Se inicia un bucle while que se ejecutará indefinidamente hasta que se rompa
-            // explícitamente con break.
+            /*
+             * Se inicia un bucle while que se ejecutará indefinidamente hasta que se rompa
+             * explícitamente con break.
+             */
             while (true) {
 
                 try {
 
-                    // Muestra un cuadro de diálogo de entrada para que el usuario ingrese la
-                    // cantidad de zapatos casuales que desea ingresar.
+                    /*
+                     * Muestra un cuadro de diálogo de entrada para que el usuario ingrese la
+                     * cantidad de zapatos casuales que desea ingresar.
+                     */
                     String input = JOptionPane.showInputDialog(null,
                             "¿Cuántos zapatos casuales desea ingresar? ",
                             "01");
 
-                    // Verifica si el usuario ha presionado "Cancelar" en el cuadro de diálogo de
-                    // entrada.
+                    /*
+                     * Verifica si el usuario ha presionado "Cancelar" en el cuadro de diálogo de
+                     * entrada.
+                     */
                     if (input == null) {
-                        // Muestra un mensaje de advertencia si el usuario ha cancelado la operación.
+                        /* Muestra un mensaje de advertencia si el usuario ha cancelado la operación. */
                         JOptionPane.showMessageDialog(null, "Ingreso Cancelado", "Ingresar Zapato Casual",
                                 JOptionPane.WARNING_MESSAGE);
-                        // Sale del método inputZapatoCasual si el usuario ha cancelado la operación.
+                        /* Sale del método inputZapatoCasual si el usuario ha cancelado la operación. */
                         return;
                     }
 
-                    // Convierte la entrada del usuario a un entero y lo asigna a la variable count.
+                    /*
+                     * Convierte la entrada del usuario a un entero y lo asigna a la variable count.
+                     */
                     count = Integer.valueOf(input);
 
                     if (count <= 0) {
@@ -191,13 +226,17 @@ public class CasualMethod {
              */
             for (int i = 0; i < count; i++) {
 
-                // (almacen + 1): Incrementa el valor de almacen en 1 para mostrar el número del
-                // zapato casual actual.
+                /*
+                 * (almacen + 1): Incrementa el valor de almacen en 1 para mostrar el número del
+                 * zapato casual actual.
+                 */
                 String nombre = JOptionPane.showInputDialog(null,
                         "Ingrese el nombre del Zapato Casual " + (almacen + 1) + ":",
                         "NOMBRE");
-                // Verifica si el usuario ha presionado "Cancelar" en el cuadro de diálogo de
-                // entrada y lanza una excepción NullPointerException si es así.
+                /*
+                 * Verifica si el usuario ha presionado "Cancelar" en el cuadro de diálogo de
+                 * entrada y lanza una excepción NullPointerException si es así.
+                 */
                 if (nombre == null) {
                     throw new NullPointerException();
                 }
@@ -266,8 +305,67 @@ public class CasualMethod {
 
                 almacen++;
             }
-            // catch of the first try, if a general error is found in the method it will
-            // release the warning
+
+            /*
+             * Se crea un nuevo objeto File llamado infoZapatoCasual que representa el
+             * archivo "infoZapatoCasual.txt" en el sistema de archivos.
+             */
+            infoZapatoCasual = new File("infoZapatoCasual.txt");
+
+            /*
+             * Se comprueba si el archivo "infoZapatoCasual.txt" no existe en el sistema de
+             * archivos.
+             */
+            if (!infoZapatoCasual.exists()) {
+                /*
+                 * Si el archivo no existe, se crea un nuevo archivo con el nombre
+                 * "infoZapatoCasual.txt".
+                 */
+                infoZapatoCasual.createNewFile();
+            }
+
+            /*
+             * Se crea un nuevo objeto FileWriter llamado escribir, que se utilizará para
+             * escribir en el archivo "infoZapatoCasual.txt". El parámetro true indica que
+             * se añadirán los datos al final del archivo si este ya existe.
+             */
+            escribir = new FileWriter(infoZapatoCasual, true);
+
+            /*
+             * Se crea un nuevo objeto PrintWriter llamado imprimir, que se utilizará para
+             * imprimir en el archivo utilizando el objeto FileWriter previamente creado.
+             */
+            imprimir = new PrintWriter(escribir);
+
+            /*
+             * El siguiente bloque de código recorre un array de objetos de la clase Casual
+             * llamado casualArray y escribe los atributos de cada objeto en el archivo
+             * "infoZapatoCasual.txt" utilizando el objeto PrintWriter:
+             */
+            for (Casual casual : casualArray) {
+                imprimir.println(casual.getNombre());
+                imprimir.println(casual.getPrecio());
+                imprimir.println(casual.getColor());
+                imprimir.println(casual.getMarca());
+                imprimir.println(casual.getTalla());
+                imprimir.println(casual.getMaterial());
+                imprimir.println(casual.getCategoria());
+            }
+
+            /*
+             * Se cierra el objeto PrintWriter, lo que asegura que todos los datos
+             * pendientes se escriban en el archivo y se liberen los recursos asociados.
+             */
+            imprimir.close();
+            /*
+             * Se cierra el objeto FileWriter, lo que asegura que todos los datos pendientes
+             * se escriban en el archivo y se liberen los recursos asociados.
+             */
+            escribir.close();
+            /*
+             * catch of the first try, if a general error is found in the method it will
+             * release the warning
+             */
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ingreso Cancelado",
                     "Ingresar Zapato Casual", JOptionPane.WARNING_MESSAGE);

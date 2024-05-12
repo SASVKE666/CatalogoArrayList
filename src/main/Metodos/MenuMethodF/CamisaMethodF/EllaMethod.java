@@ -1,5 +1,8 @@
 package main.Metodos.MenuMethodF.CamisaMethodF;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -14,6 +17,10 @@ public class EllaMethod {
         static int selectCamisa = 0;
 
         static int almacen = 0;
+
+        static File infoCamisaElla;
+        static FileWriter escribir;
+        static PrintWriter imprimir;
 
         public static void camisaElla() {
                 do {
@@ -170,6 +177,30 @@ public class EllaMethod {
                                 almacen++;
 
                         }
+
+                        infoCamisaElla = new File("infoCamisaElla.txt");
+
+                        if (!infoCamisaElla.exists()) {
+                                infoCamisaElla.createNewFile();
+                        }
+
+                        escribir = new FileWriter(infoCamisaElla, true);
+
+                        imprimir = new PrintWriter(escribir);
+
+                        for (Ella ella : ellaArray) {
+                                imprimir.println(ella.getNombre());
+                                imprimir.println(ella.getPrecio());
+                                imprimir.println(ella.getColor());
+                                imprimir.println(ella.getMarca());
+                                imprimir.println(ella.getTalla());
+                                imprimir.println(ella.getTela());
+                                imprimir.println(ella.getEstilo());
+                        }
+
+                        imprimir.close();
+                        escribir.close();
+                        
                 } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Ingreso Cancelado",
                                         "Ingresar Camisa Ella", JOptionPane.WARNING_MESSAGE);
@@ -464,7 +495,6 @@ public class EllaMethod {
                                                 if (estilo == null) {
                                                         throw new NullPointerException();
                                                 }
-                                     
 
                                                 currentProduct.setNombre(nombre);
                                                 currentProduct.setPrecio(precio);
@@ -479,7 +509,7 @@ public class EllaMethod {
                                                 JOptionPane.showMessageDialog(
                                                                 null,
                                                                 "Camisa Ella actualizada: \n" +
-                                                                currentProduct.toString(),
+                                                                                currentProduct.toString(),
                                                                 "Actualizacion exitosa",
                                                                 JOptionPane.INFORMATION_MESSAGE);
 

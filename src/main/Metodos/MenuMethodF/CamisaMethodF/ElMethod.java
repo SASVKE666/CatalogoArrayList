@@ -1,5 +1,8 @@
 package main.Metodos.MenuMethodF.CamisaMethodF;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -14,6 +17,10 @@ public class ElMethod {
     static int selectCamisa = 0;
 
     static int almacen = 0;
+
+    static File infoCamisaEl;
+    static FileWriter escribir;
+    static PrintWriter imprimir;
 
     public static void camisaEl() {
         do {
@@ -171,6 +178,30 @@ public class ElMethod {
 
                 almacen++;
             }
+
+            infoCamisaEl = new File("infoCamisaEl.txt");
+
+            if(!infoCamisaEl.exists()){
+                infoCamisaEl.createNewFile();
+            }
+            
+            escribir = new FileWriter(infoCamisaEl, true);
+            
+            imprimir = new PrintWriter(escribir);
+
+            for (El el : elArray) {
+                imprimir.println(el.getNombre());
+                imprimir.println(el.getPrecio());
+                imprimir.println(el.getColor());
+                imprimir.println(el.getMarca());
+                imprimir.println(el.getTalla());
+                imprimir.println(el.getTela());
+                imprimir.println(el.getTipo());
+            }
+
+            imprimir.close();
+            escribir.close();
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ingreso Cancelado",
                     "Ingresar Camisa El", JOptionPane.WARNING_MESSAGE);
