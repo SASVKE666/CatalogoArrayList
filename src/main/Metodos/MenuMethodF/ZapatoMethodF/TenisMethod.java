@@ -16,9 +16,9 @@ public class TenisMethod {
 
         static int almacen = 0;
 
-            static File infoZapatoTenis;
-    static FileWriter escribir;
-    static PrintWriter imprimir;
+        static File infoZapatoTenis;
+        static FileWriter escribir;
+        static PrintWriter imprimir;
 
         static ArrayList<Tenis> tenisArray = new ArrayList<>();
 
@@ -195,26 +195,26 @@ public class TenisMethod {
 
                         infoZapatoTenis = new File("infoZapatoTenis.txt");
 
-            if(!infoZapatoTenis.exists()){
-                infoZapatoTenis.createNewFile();
-            }
-            
-            escribir = new FileWriter(infoZapatoTenis, true);
-            
-            imprimir = new PrintWriter(escribir);
+                        if (!infoZapatoTenis.exists()) {
+                                infoZapatoTenis.createNewFile();
+                        }
 
-            for (Tenis tenis : tenisArray) {
-                imprimir.println(tenis.getNombre());
-                imprimir.println(tenis.getPrecio());
-                imprimir.println(tenis.getColor());
-                imprimir.println(tenis.getMarca());
-                imprimir.println(tenis.getTalla());
-                imprimir.println(tenis.getMaterial());
-                imprimir.println(tenis.getDeporte());
-            }
+                        escribir = new FileWriter(infoZapatoTenis, true);
 
-            imprimir.close();
-            escribir.close();
+                        imprimir = new PrintWriter(escribir);
+
+                        for (Tenis tenis : tenisArray) {
+                                imprimir.println(tenis.getNombre());
+                                imprimir.println(tenis.getPrecio());
+                                imprimir.println(tenis.getColor());
+                                imprimir.println(tenis.getMarca());
+                                imprimir.println(tenis.getTalla());
+                                imprimir.println(tenis.getMaterial());
+                                imprimir.println(tenis.getDeporte());
+                        }
+
+                        imprimir.close();
+                        escribir.close();
 
                 } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Ingreso Cancelado",
@@ -330,16 +330,16 @@ public class TenisMethod {
                                         codigoFind = Integer.valueOf(input);
                                         if (codigoFind <= 0) {
                                                 JOptionPane.showMessageDialog(
-                                                        null,
-                                                        "Debe ingresar obligatoriamente un número entero.",
-                                                        "Error",
-                                                        JOptionPane.ERROR_MESSAGE);
-                        
-                                            } else {
+                                                                null,
+                                                                "Debe ingresar obligatoriamente un número entero.",
+                                                                "Error",
+                                                                JOptionPane.ERROR_MESSAGE);
+
+                                        } else {
                                                 // Rompe el bucle while una vez que se ha obtenido un valor válido para
                                                 // count.
                                                 break;
-                                            }
+                                        }
                                 } catch (NumberFormatException e) {
                                         JOptionPane.showMessageDialog(null, "Ingrese un número",
                                                         "Error", JOptionPane.ERROR_MESSAGE);
@@ -537,7 +537,7 @@ public class TenisMethod {
                                                 JOptionPane.showMessageDialog(
                                                                 null,
                                                                 "Zapato Tenis actualizado: \n" +
-                                                                currentProduct.toString(),
+                                                                                currentProduct.toString(),
                                                                 "Actualizacion Exitosa",
                                                                 JOptionPane.INFORMATION_MESSAGE);
 
