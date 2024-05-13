@@ -12,7 +12,7 @@ public class CasualMethod extends ProductoMethod {
 
     int almacen = 0;
 
-    @Override
+
     public void eraseProducto(int codeToErase,  int almacen) {
         // Implementación del método eraseProducto para la clase Casual
         // Copia el código existente del método eraseZapatoCasual y realiza las

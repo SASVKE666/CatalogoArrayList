@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import main.Clases.Products.CamisaF.El;
+import main.Metodos.ProductoMethod;
 import main.Metodos.MenuMethodF.CamisaMethod;
 
-public class ElMethod {
+public class ElMethod extends ProductoMethod{
 
     static ArrayList<El> elArray = new ArrayList<>();
 
@@ -179,7 +180,7 @@ public class ElMethod {
                 almacen++;
             }
 
-            infoCamisaEl = new File("infoCamisaEl.txt");
+            infoCamisaEl = new File("src\\InfoProductos\\infoCamisaEl.txt");
 
             if(!infoCamisaEl.exists()){
                 infoCamisaEl.createNewFile();
@@ -208,6 +209,9 @@ public class ElMethod {
         }
     }
 
+    public static void eraseCamisaElExtends(){
+        
+    }
     public static void eraseCamisaEl() {
 
         try {

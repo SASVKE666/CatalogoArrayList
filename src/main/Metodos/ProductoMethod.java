@@ -6,11 +6,12 @@ import javax.swing.JOptionPane;
 
 import main.Clases.Producto;
 
-public abstract class ProductoMethod {
+public class ProductoMethod {
 
     protected ArrayList<? extends Producto> productoArray = new ArrayList<>();
 
-    public void eraseProducto(int codeToErase, int almacen) {
+    public void eraseProducto(int codeToErase, int almacen, String producto, Object obj) {
+        
         try {
             for (int i = 0; i < productoArray.size(); i++) {
                 Producto currentProduct = productoArray.get(i);
@@ -20,13 +21,13 @@ public abstract class ProductoMethod {
                             null,
                             "¿Estás seguro de que deseas eliminar el siguiente Producto?\n" +
                                     currentProduct.toString(),
-                            "Confirmar Eliminación",
+                            producto + ".   Confirmar Eliminación. ",
                             JOptionPane.YES_NO_OPTION);
 
                     if (confirmacion == JOptionPane.NO_OPTION) {
                         JOptionPane.showMessageDialog(
                                 null, "Eliminacion cancelada",
-                                "Eliminacion Cancelada",
+                                producto + ".   Eliminacion Cancelada. ",
                                 JOptionPane.INFORMATION_MESSAGE);
                         return;
                     }
@@ -35,7 +36,7 @@ public abstract class ProductoMethod {
                             null,
                             "Producto eliminado: \n " +
                                     currentProduct.toString(),
-                            "Eliminacion Existosa",
+                            producto + ".    Eliminacion Existosa." ,
                             JOptionPane.INFORMATION_MESSAGE);
 
                     productoArray.remove(i);
@@ -51,11 +52,11 @@ public abstract class ProductoMethod {
             JOptionPane.showMessageDialog(
                     null,
                     "Producto con código " + codeToErase + " no ha sido encontrado.",
-                    "Búsqueda Fallida",
+                    producto + ".   Búsqueda Fallida",
                     JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Eliminar Cancelado",
-                    "Eliminar Producto", JOptionPane.WARNING_MESSAGE);
+                    producto + ".   Eliminar Producto", JOptionPane.WARNING_MESSAGE);
         }
     }
 
