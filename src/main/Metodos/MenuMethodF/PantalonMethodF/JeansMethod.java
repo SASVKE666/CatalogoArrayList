@@ -203,7 +203,7 @@ public class JeansMethod {
                                 almacen++;
 
                         }
-                        infoPantalonJeans = new File("infoPantalonJeans.txt");
+                        infoPantalonJeans = new File("src\\InfoProductos\\infoPantalonJeans.txt");
 
             if(!infoPantalonJeans.exists()){
                 infoPantalonJeans.createNewFile();

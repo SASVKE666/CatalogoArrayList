@@ -310,7 +310,7 @@ public class CasualMethod {
              * Se crea un nuevo objeto File llamado infoZapatoCasual que representa el
              * archivo "infoZapatoCasual.txt" en el sistema de archivos.
              */
-            infoZapatoCasual = new File("infoZapatoCasual.txt");
+            infoZapatoCasual = new File("src\\InfoProductos\\infoZapatoCasual.txt");
 
             /*
              * Se comprueba si el archivo "infoZapatoCasual.txt" no existe en el sistema de

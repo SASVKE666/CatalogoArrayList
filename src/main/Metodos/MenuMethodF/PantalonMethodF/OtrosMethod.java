@@ -192,7 +192,7 @@ public class OtrosMethod {
                                 almacen++;
                         }
 
-                        infoPantalonOtros = new File("infoPantalonOtros.txt");
+                        infoPantalonOtros = new File("src\\InfoProductos\\infoPantalonOtros.txt");
 
             if(!infoPantalonOtros.exists()){
                 infoPantalonOtros.createNewFile();

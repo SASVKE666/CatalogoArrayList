@@ -193,7 +193,7 @@ public class TenisMethod {
                                 almacen++;
                         }
 
-                        infoZapatoTenis = new File("infoZapatoTenis.txt");
+                        infoZapatoTenis = new File("src\\InfoProductos\\infoZapatoTenis.txt");
 
                         if (!infoZapatoTenis.exists()) {
                                 infoZapatoTenis.createNewFile();

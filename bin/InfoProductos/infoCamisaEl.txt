@@ -5,3 +5,10 @@ MARCA
 TALLA
 MATERIAL
 TIPO
+qwesdasfervwrethbsrthg
+0.0
+COLOR
+MARCA
+TALLA
+MATERIAL
+TIPO

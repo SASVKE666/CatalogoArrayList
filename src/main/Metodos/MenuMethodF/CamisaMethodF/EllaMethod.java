@@ -178,7 +178,7 @@ public class EllaMethod {
 
                         }
 
-                        infoCamisaElla = new File("infoCamisaElla.txt");
+                        infoCamisaElla = new File("src\\InfoProductos\\infoCamisaElla.txt");
 
                         if (!infoCamisaElla.exists()) {
                                 infoCamisaElla.createNewFile();
