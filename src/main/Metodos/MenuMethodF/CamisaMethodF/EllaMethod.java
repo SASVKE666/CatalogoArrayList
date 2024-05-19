@@ -180,6 +180,10 @@ public class EllaMethod {
 
                         infoCamisaElla = new File("src\\InfoProductos\\infoCamisaElla.txt");
 
+                        if(infoCamisaElla.exists()) {
+                                infoCamisaElla.delete(); 
+                        }
+
                         if (!infoCamisaElla.exists()) {
                                 infoCamisaElla.createNewFile();
                         }
@@ -200,6 +204,7 @@ public class EllaMethod {
 
                         imprimir.close();
                         escribir.close();
+                        
                         
                 } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Ingreso Cancelado",
