@@ -178,7 +178,7 @@ public class EllaMethod {
 
                         }
 
-                        infoCamisaElla = new File("src\\InfoProductos\\infoCamisaElla.txt");
+                        infoCamisaElla = new File("src\\InfoProductos\\infoCamisaElla.txt");   
 
                         if(infoCamisaElla.exists()) {
                                 infoCamisaElla.delete(); 
@@ -204,6 +204,8 @@ public class EllaMethod {
 
                         imprimir.close();
                         escribir.close();
+
+                        /* infoCamisaElla.deleteOnExit(); */
                         
                         
                 } catch (Exception e) {
