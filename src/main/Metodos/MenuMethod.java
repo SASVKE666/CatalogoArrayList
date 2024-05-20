@@ -5,6 +5,12 @@ import javax.swing.JOptionPane;
 import main.Metodos.MenuMethodF.CamisaMethod;
 import main.Metodos.MenuMethodF.PantalonMethod;
 import main.Metodos.MenuMethodF.ZapatoMethod;
+import main.Metodos.MenuMethodF.CamisaMethodF.ElMethod;
+import main.Metodos.MenuMethodF.CamisaMethodF.EllaMethod;
+import main.Metodos.MenuMethodF.PantalonMethodF.JeansMethod;
+import main.Metodos.MenuMethodF.PantalonMethodF.OtrosMethod;
+import main.Metodos.MenuMethodF.ZapatoMethodF.CasualMethod;
+import main.Metodos.MenuMethodF.ZapatoMethodF.TenisMethod;
 
 public class MenuMethod {
     
@@ -46,6 +52,12 @@ public class MenuMethod {
                         break;
                         
                         case 3:
+                        EllaMethod.writeToFileElla();
+                        ElMethod.writeToFileEl();
+                        JeansMethod.writeToFileJeans();
+                        OtrosMethod.writeToFileOtros();
+                        CasualMethod.writeToFileCasual();
+                        TenisMethod.writeToFileTenis();
                         //JOptionPane.showMessageDialog(null, "Bye Bye", "Adios", 2);
                         return;
                         

@@ -1,11 +1,4 @@
-NOMBRE
-0.0
-COLOR
-MARCA
-TALLA
-MATERIAL
-TIPO
-qwesdasfervwrethbsrthg
+EL
 0.0
 COLOR
 MARCA

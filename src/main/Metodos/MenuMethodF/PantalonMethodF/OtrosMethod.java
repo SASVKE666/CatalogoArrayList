@@ -19,8 +19,8 @@ public class OtrosMethod {
         static int almacen = 0;
 
         static File infoPantalonOtros;
-    static FileWriter escribir;
-    static PrintWriter imprimir;
+        static FileWriter escribir;
+        static PrintWriter imprimir;
 
         public static void pantalonOtros() {
                 do {
@@ -71,6 +71,40 @@ public class OtrosMethod {
                                                 JOptionPane.WARNING_MESSAGE);
                         }
                 } while (selectPantalon != 5);
+        }
+
+        public static void writeToFileOtros() {
+                try {
+                        infoPantalonOtros = new File("src\\InfoProductos\\infoPantalonOtros.txt");
+
+                        if(infoPantalonOtros.exists()){
+                                infoPantalonOtros.delete();
+                        }
+                        
+                        if (!infoPantalonOtros.exists()) {
+                                infoPantalonOtros.createNewFile();
+                        }
+
+                        escribir = new FileWriter(infoPantalonOtros, true);
+
+                        imprimir = new PrintWriter(escribir);
+
+                        for (Otros otros : otrosArray) {
+                                imprimir.println(otros.getNombre());
+                                imprimir.println(otros.getPrecio());
+                                imprimir.println(otros.getColor());
+                                imprimir.println(otros.getMarca());
+                                imprimir.println(otros.getTalla());
+                                imprimir.println(otros.getTela());
+                                imprimir.println(otros.getEstilo());
+                        }
+
+                        imprimir.close();
+                        escribir.close();
+                } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Error al escribir en el archivo",
+                                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
         }
 
         public static void inputPantalonOtros() {
@@ -191,29 +225,6 @@ public class OtrosMethod {
 
                                 almacen++;
                         }
-
-                        infoPantalonOtros = new File("src\\InfoProductos\\infoPantalonOtros.txt");
-
-            if(!infoPantalonOtros.exists()){
-                infoPantalonOtros.createNewFile();
-            }
-            
-            escribir = new FileWriter(infoPantalonOtros, true);
-            
-            imprimir = new PrintWriter(escribir);
-
-            for (Otros otros : otrosArray) {
-                imprimir.println(otros.getNombre());
-                imprimir.println(otros.getPrecio());
-                imprimir.println(otros.getColor());
-                imprimir.println(otros.getMarca());
-                imprimir.println(otros.getTalla());
-                imprimir.println(otros.getTela());
-                imprimir.println(otros.getEstilo());
-            }
-
-            imprimir.close();
-            escribir.close();
 
                 } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Ingreso Cancelado",
@@ -391,7 +402,7 @@ public class OtrosMethod {
         public static void editPantalonOtros() {
 
                 try {
-                        Integer codeToEdit ;
+                        Integer codeToEdit;
                         while (true) {
                                 try {
                                         String input = JOptionPane.showInputDialog(
@@ -519,7 +530,7 @@ public class OtrosMethod {
                                                 if (estilo == null) {
                                                         throw new NullPointerException();
                                                 }
-        
+
                                                 currentProduct.setNombre(nombre);
                                                 currentProduct.setPrecio(precio);
                                                 currentProduct.setColor(color);

@@ -73,6 +73,41 @@ public class TenisMethod {
                 } while (selectZapato != 5);
         }
 
+        public static void writeToFileTenis() {
+                try {
+                        infoZapatoTenis = new File("src\\InfoProductos\\infoZapatoTenis.txt");
+
+                        if (infoZapatoTenis.exists()){
+                                infoZapatoTenis.delete();
+                        }
+                        
+                        if (!infoZapatoTenis.exists()) {
+                                infoZapatoTenis.createNewFile();
+                        }
+
+                        escribir = new FileWriter(infoZapatoTenis, true);
+
+                        imprimir = new PrintWriter(escribir);
+
+                        for (Tenis tenis : tenisArray) {
+                                imprimir.println(tenis.getNombre());
+                                imprimir.println(tenis.getPrecio());
+                                imprimir.println(tenis.getColor());
+                                imprimir.println(tenis.getMarca());
+                                imprimir.println(tenis.getTalla());
+                                imprimir.println(tenis.getMaterial());
+                                imprimir.println(tenis.getDeporte());
+                        }
+
+                        imprimir.close();
+                        escribir.close();
+
+                } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Error al escribir en el archivo",
+                                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
+        }
+
         public static void inputZapatoTenis() {
 
                 try {
@@ -192,29 +227,6 @@ public class TenisMethod {
 
                                 almacen++;
                         }
-
-                        infoZapatoTenis = new File("src\\InfoProductos\\infoZapatoTenis.txt");
-
-                        if (!infoZapatoTenis.exists()) {
-                                infoZapatoTenis.createNewFile();
-                        }
-
-                        escribir = new FileWriter(infoZapatoTenis, true);
-
-                        imprimir = new PrintWriter(escribir);
-
-                        for (Tenis tenis : tenisArray) {
-                                imprimir.println(tenis.getNombre());
-                                imprimir.println(tenis.getPrecio());
-                                imprimir.println(tenis.getColor());
-                                imprimir.println(tenis.getMarca());
-                                imprimir.println(tenis.getTalla());
-                                imprimir.println(tenis.getMaterial());
-                                imprimir.println(tenis.getDeporte());
-                        }
-
-                        imprimir.close();
-                        escribir.close();
 
                 } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Ingreso Cancelado",

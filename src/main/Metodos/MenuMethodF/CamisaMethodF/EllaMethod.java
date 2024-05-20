@@ -70,6 +70,41 @@ public class EllaMethod {
                                                 "Camisa Ella Menu", JOptionPane.WARNING_MESSAGE);
                         }
                 } while (selectCamisa != 5);
+
+        }
+
+        public static void writeToFileElla() {
+                try {
+                        infoCamisaElla = new File("src\\InfoProductos\\infoCamisaElla.txt");
+
+                        if (infoCamisaElla.exists()) {
+                                infoCamisaElla.delete();
+                        }
+
+                        if (!infoCamisaElla.exists()) {
+                                infoCamisaElla.createNewFile();
+                        }
+
+                        escribir = new FileWriter(infoCamisaElla, true);
+                        imprimir = new PrintWriter(escribir);
+
+                        for (Ella ella : ellaArray) {
+                                imprimir.println(ella.getNombre());
+                                imprimir.println(ella.getPrecio());
+                                imprimir.println(ella.getColor());
+                                imprimir.println(ella.getMarca());
+                                imprimir.println(ella.getTalla());
+                                imprimir.println(ella.getTela());
+                                imprimir.println(ella.getEstilo());
+                        }
+
+                        imprimir.close();
+                        escribir.close();
+
+                } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Error al escribir en el archivo",
+                                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
         }
 
         public static void inputCamisaElla() {
@@ -178,36 +213,7 @@ public class EllaMethod {
 
                         }
 
-                        infoCamisaElla = new File("src\\InfoProductos\\infoCamisaElla.txt");   
 
-                        if(infoCamisaElla.exists()) {
-                                infoCamisaElla.delete(); 
-                        }
-
-                        if (!infoCamisaElla.exists()) {
-                                infoCamisaElla.createNewFile();
-                        }
-
-                        escribir = new FileWriter(infoCamisaElla, true);
-
-                        imprimir = new PrintWriter(escribir);
-
-                        for (Ella ella : ellaArray) {
-                                imprimir.println(ella.getNombre());
-                                imprimir.println(ella.getPrecio());
-                                imprimir.println(ella.getColor());
-                                imprimir.println(ella.getMarca());
-                                imprimir.println(ella.getTalla());
-                                imprimir.println(ella.getTela());
-                                imprimir.println(ella.getEstilo());
-                        }
-
-                        imprimir.close();
-                        escribir.close();
-
-                        /* infoCamisaElla.deleteOnExit(); */
-                        
-                        
                 } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Ingreso Cancelado",
                                         "Ingresar Camisa Ella", JOptionPane.WARNING_MESSAGE);

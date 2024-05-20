@@ -19,8 +19,8 @@ public class JeansMethod {
         static int almacen = 0;
 
         static File infoPantalonJeans;
-    static FileWriter escribir;
-    static PrintWriter imprimir;
+        static FileWriter escribir;
+        static PrintWriter imprimir;
 
         public static void pantalonJeans() {
                 do {
@@ -71,6 +71,41 @@ public class JeansMethod {
                                                 JOptionPane.WARNING_MESSAGE);
                         }
                 } while (selectPantalon != 5);
+        }
+
+        public static void writeToFileJeans() {
+                try {
+                        infoPantalonJeans = new File("src\\InfoProductos\\infoPantalonJeans.txt");
+
+                        if (infoPantalonJeans.exists()) {
+                                infoPantalonJeans.delete();
+                        }
+
+                        if (!infoPantalonJeans.exists()) {
+                                infoPantalonJeans.createNewFile();
+                        }
+
+                        escribir = new FileWriter(infoPantalonJeans, true);
+
+                        imprimir = new PrintWriter(escribir);
+
+                        for (Jeans jeans : jeansArray) {
+                                imprimir.println(jeans.getNombre());
+                                imprimir.println(jeans.getPrecio());
+                                imprimir.println(jeans.getColor());
+                                imprimir.println(jeans.getMarca());
+                                imprimir.println(jeans.getTalla());
+                                imprimir.println(jeans.getTela());
+                                imprimir.println(jeans.getCorte());
+                        }
+
+                        imprimir.close();
+                        escribir.close();
+                } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Error al escribir en el archivo",
+                                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
         }
 
         public static void inputPantalonJeans() {
@@ -203,29 +238,7 @@ public class JeansMethod {
                                 almacen++;
 
                         }
-                        infoPantalonJeans = new File("src\\InfoProductos\\infoPantalonJeans.txt");
 
-            if(!infoPantalonJeans.exists()){
-                infoPantalonJeans.createNewFile();
-            }
-            
-            escribir = new FileWriter(infoPantalonJeans, true);
-            
-            imprimir = new PrintWriter(escribir);
-
-            for (Jeans jeans : jeansArray) {
-                imprimir.println(jeans.getNombre());
-                imprimir.println(jeans.getPrecio());
-                imprimir.println(jeans.getColor());
-                imprimir.println(jeans.getMarca());
-                imprimir.println(jeans.getTalla());
-                imprimir.println(jeans.getTela());
-                imprimir.println(jeans.getCorte());
-            }
-
-            imprimir.close();
-            escribir.close();
-            
                 } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Ingreso Cancelado",
                                         "Ingresar Pantalon Jeans", JOptionPane.WARNING_MESSAGE);
@@ -268,7 +281,7 @@ public class JeansMethod {
                                                         "Error", JOptionPane.ERROR_MESSAGE);
                                 }
                         }
-                        
+
                         Jeans jeansErase = new Jeans(codeToErase);
 
                         for (int i = 0; i < jeansArray.size(); i++) {
@@ -339,16 +352,16 @@ public class JeansMethod {
                                         codigoFind = Integer.valueOf(input);
                                         if (codigoFind < 0) {
                                                 JOptionPane.showMessageDialog(
-                                                        null,
-                                                        "Debe ingresar obligatoriamente un número entero.",
-                                                        "Error",
-                                                        JOptionPane.ERROR_MESSAGE);
-                        
-                                            } else {
+                                                                null,
+                                                                "Debe ingresar obligatoriamente un número entero.",
+                                                                "Error",
+                                                                JOptionPane.ERROR_MESSAGE);
+
+                                        } else {
                                                 // Rompe el bucle while una vez que se ha obtenido un valor válido para
                                                 // count.
                                                 break;
-                                            }
+                                        }
                                 } catch (NumberFormatException e) {
                                         JOptionPane.showMessageDialog(null, "Ingrese un número",
                                                         "Error", JOptionPane.ERROR_MESSAGE);

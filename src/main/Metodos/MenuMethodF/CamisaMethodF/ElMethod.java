@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import main.Clases.Products.CamisaF.El;
-import main.Metodos.ProductoMethod;
 import main.Metodos.MenuMethodF.CamisaMethod;
 
-public class ElMethod extends ProductoMethod{
+public class ElMethod{
 
     static ArrayList<El> elArray = new ArrayList<>();
 
@@ -71,6 +70,40 @@ public class ElMethod extends ProductoMethod{
                         "Camisa El Menu", JOptionPane.WARNING_MESSAGE);
             }
         } while (selectCamisa != 5);
+    }
+
+    public static void writeToFileEl() {
+        try {
+            infoCamisaEl = new File("src\\InfoProductos\\infoCamisaEl.txt");
+
+            if (infoCamisaEl.exists()) {
+                infoCamisaEl.delete();
+            }
+
+            if (!infoCamisaEl.exists()) {
+                infoCamisaEl.createNewFile();
+            }
+
+            escribir = new FileWriter(infoCamisaEl, true);
+
+            imprimir = new PrintWriter(escribir);
+
+            for (El el : elArray) {
+                imprimir.println(el.getNombre());
+                imprimir.println(el.getPrecio());
+                imprimir.println(el.getColor());
+                imprimir.println(el.getMarca());
+                imprimir.println(el.getTalla());
+                imprimir.println(el.getTela());
+                imprimir.println(el.getTipo());
+            }
+
+            imprimir.close();
+            escribir.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al escribir en el archivo",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public static void inputCamisaEl() {
@@ -180,38 +213,12 @@ public class ElMethod extends ProductoMethod{
                 almacen++;
             }
 
-            infoCamisaEl = new File("src\\InfoProductos\\infoCamisaEl.txt");
-
-            if(!infoCamisaEl.exists()){
-                infoCamisaEl.createNewFile();
-            }
-            
-            escribir = new FileWriter(infoCamisaEl, true);
-            
-            imprimir = new PrintWriter(escribir);
-
-            for (El el : elArray) {
-                imprimir.println(el.getNombre());
-                imprimir.println(el.getPrecio());
-                imprimir.println(el.getColor());
-                imprimir.println(el.getMarca());
-                imprimir.println(el.getTalla());
-                imprimir.println(el.getTela());
-                imprimir.println(el.getTipo());
-            }
-
-            imprimir.close();
-            escribir.close();
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ingreso Cancelado",
                     "Ingresar Camisa El", JOptionPane.WARNING_MESSAGE);
         }
     }
 
-    public static void eraseCamisaElExtends(){
-        
-    }
     public static void eraseCamisaEl() {
 
         try {
