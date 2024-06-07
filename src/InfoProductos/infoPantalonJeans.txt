@@ -1,7 +1,0 @@
-jeans
-0.0
-COLOR
-MARCA
-0
-MATERIAL
-CORTE

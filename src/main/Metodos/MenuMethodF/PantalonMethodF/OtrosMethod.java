@@ -1,7 +1,13 @@
 package main.Metodos.MenuMethodF.PantalonMethodF;
 
+import java.io.EOFException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -18,7 +24,7 @@ public class OtrosMethod {
 
         static int almacen = 0;
 
-        static File infoPantalonOtros;
+        static File infoPantalonOtros = new File("src\\InfoProductos\\infoPantalonOtros.txt");
         static FileWriter escribir;
         static PrintWriter imprimir;
 
@@ -74,37 +80,66 @@ public class OtrosMethod {
         }
 
         public static void writeToFileOtros() {
-                try {
-                        infoPantalonOtros = new File("src\\InfoProductos\\infoPantalonOtros.txt");
 
-                        if(infoPantalonOtros.exists()){
-                                infoPantalonOtros.delete();
-                        }
-                        
-                        if (!infoPantalonOtros.exists()) {
-                                infoPantalonOtros.createNewFile();
-                        }
+                try (FileOutputStream fileOut = new FileOutputStream(infoPantalonOtros);
+                                ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
 
-                        escribir = new FileWriter(infoPantalonOtros, true);
-
-                        imprimir = new PrintWriter(escribir);
-
+                        // Serializar objetos Gorra en el archivo
                         for (Otros otros : otrosArray) {
-                                imprimir.println(otros.getNombre());
-                                imprimir.println(otros.getPrecio());
-                                imprimir.println(otros.getColor());
-                                imprimir.println(otros.getMarca());
-                                imprimir.println(otros.getTalla());
-                                imprimir.println(otros.getTela());
-                                imprimir.println(otros.getEstilo());
+                                if (otros != null) {
+                                        objectOut.writeObject(otros);
+                                }
                         }
 
-                        imprimir.close();
-                        escribir.close();
-                } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "Error al escribir en el archivo",
-                                        "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (IOException e) {
+                        System.out.println(e);
                 }
+
+        }
+
+        public static void readerFileOtros() {
+                
+                int contadorArray = 0;
+                try (FileInputStream fileIn = new FileInputStream(infoPantalonOtros);
+                                ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
+                                        
+                        // Leer objetos Gorra del archivo
+                       /*  for (int i = 0; i < otrosArray.size(); i++) {
+                               
+                                try {
+                                        Otros otros = (Otros) objectIn.readObject();
+                                        otrosArray.add(otros);
+                                        contadorArray ++ ;
+                                } catch (EOFException e) {
+                                        break;
+                                } catch (ClassNotFoundException | IOException e) {
+                                        System.out.println("Error al leer los objetos: " + e.getMessage());
+                                }
+                        } */
+                        try {
+                                System.out.println("Hola");
+                                while (true) {
+                                    Otros otros = (Otros) objectIn.readObject();
+                                    otrosArray.add(otros);
+                                    contadorArray++;
+                                }
+                            } catch (EOFException e) {
+                                // Fin del archivo, salir del bucle
+                            } catch (ClassNotFoundException | IOException e) {
+                                System.out.println("Error al leer los objetos: " + e.getMessage());
+                            }
+
+                        // Imprimir los objetos Gorra leídos
+                        for (Otros otros : otrosArray) {
+                                if (otros != null) {
+                                        System.out.println(otros.toString());
+                                }
+                        }
+
+                } catch (IOException e) {
+                        System.out.println("Error al abrir el archivo: " + e.getMessage());
+                }
+                almacen = contadorArray ++ ;
         }
 
         public static void inputPantalonOtros() {

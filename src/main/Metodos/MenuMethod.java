@@ -52,13 +52,7 @@ public class MenuMethod {
                         break;
                         
                         case 3:
-                        EllaMethod.writeToFileElla();
-                        ElMethod.writeToFileEl();
-                        JeansMethod.writeToFileJeans();
-                        OtrosMethod.writeToFileOtros();
-                        CasualMethod.writeToFileCasual();
-                        TenisMethod.writeToFileTenis();
-                        //JOptionPane.showMessageDialog(null, "Bye Bye", "Adios", 2);
+                        initializeWriteToFileMethods();
                         return;
                         
                     }
@@ -70,4 +64,18 @@ public class MenuMethod {
                 }
             }while(selectMenu != 3);
     }
+
+    public static void initializeWriteToFileMethods(){
+        EllaMethod.writeToFileElla();
+        ElMethod.writeToFileEl();
+        JeansMethod.writeToFileJeans();
+        OtrosMethod.writeToFileOtros();
+        CasualMethod.writeToFileCasual();
+        TenisMethod.writeToFileTenis();
+    }
+
+    public static void initializeReaderFileMethods(){
+        OtrosMethod.readerFileOtros();
+    }
+    
 }

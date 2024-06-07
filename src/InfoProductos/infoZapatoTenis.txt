@@ -1,7 +1,0 @@
-tenis
-0.0
-COLOR
-MARCA
-0.0
-MATERIAL
-DEPORTE
