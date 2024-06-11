@@ -98,48 +98,31 @@ public class OtrosMethod {
         }
 
         public static void readerFileOtros() {
-                
+
                 int contadorArray = 0;
                 try (FileInputStream fileIn = new FileInputStream(infoPantalonOtros);
                                 ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
-                                        
-                        // Leer objetos Gorra del archivo
-                       /*  for (int i = 0; i < otrosArray.size(); i++) {
-                               
-                                try {
-                                        Otros otros = (Otros) objectIn.readObject();
-                                        otrosArray.add(otros);
-                                        contadorArray ++ ;
-                                } catch (EOFException e) {
-                                        break;
-                                } catch (ClassNotFoundException | IOException e) {
-                                        System.out.println("Error al leer los objetos: " + e.getMessage());
-                                }
-                        } */
-                        try {
-                                System.out.println("Hola");
-                                while (true) {
-                                    Otros otros = (Otros) objectIn.readObject();
-                                    otrosArray.add(otros);
-                                    contadorArray++;
-                                }
-                            } catch (EOFException e) {
-                                // Fin del archivo, salir del bucle
-                            } catch (ClassNotFoundException | IOException e) {
-                                System.out.println("Error al leer los objetos: " + e.getMessage());
-                            }
 
-                        // Imprimir los objetos Gorra leídos
-                        for (Otros otros : otrosArray) {
-                                if (otros != null) {
-                                        System.out.println(otros.toString());
+                        try {
+
+                                while (true) {
+                                        Otros otros = (Otros) objectIn.readObject();
+                                        @SuppressWarnings("unused")
+                                        Otros contador = new Otros();
+                                        otrosArray.add(otros);
+
+                                        contadorArray++;
                                 }
+                        } catch (EOFException e) {
+                                // Fin del archivo, salir del bucle
+                        } catch (ClassNotFoundException | IOException e) {
+                                System.out.println("Error al leer los objetos: " + e.getMessage());
                         }
 
                 } catch (IOException e) {
                         System.out.println("Error al abrir el archivo: " + e.getMessage());
                 }
-                almacen = contadorArray ++ ;
+                almacen = contadorArray++;
         }
 
         public static void inputPantalonOtros() {
@@ -237,13 +220,13 @@ public class OtrosMethod {
                                 }
 
                                 String tela = JOptionPane.showInputDialog(null,
-                                                "Ingrese el material del Pantalon Otros " + (almacen + 1) + ":",
-                                                "MATERIAL");
+                                                "Ingrese la tela del Pantalon Otros " + (almacen + 1) + ":",
+                                                "TELA");
                                 if (tela == null) {
                                         throw new NullPointerException();
                                 }
                                 String estilo = JOptionPane.showInputDialog(null,
-                                                "Ingrese la categoria del Pantalon Otros " + (almacen + 1) + ":",
+                                                "Ingrese el estilo del Pantalon Otros " + (almacen + 1) + ":",
                                                 "ESTILO");
                                 if (estilo == null) {
                                         throw new NullPointerException();
@@ -552,14 +535,14 @@ public class OtrosMethod {
                                                 }
 
                                                 String tela = JOptionPane.showInputDialog(null,
-                                                                "Ingrese el material del Pantalon Otros "
+                                                                "Ingrese la tela del Pantalon Otros "
                                                                                 + (almacen + 1) + ":",
-                                                                "MATERIAL");
+                                                                "TELA");
                                                 if (tela == null) {
                                                         throw new NullPointerException();
                                                 }
                                                 String estilo = JOptionPane.showInputDialog(null,
-                                                                "Ingrese la categoria del Pantalon Otros "
+                                                                "Ingrese el estilo del Pantalon Otros "
                                                                                 + (almacen + 1) + ":",
                                                                 "ESTILO");
                                                 if (estilo == null) {

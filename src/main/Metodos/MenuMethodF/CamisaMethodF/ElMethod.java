@@ -1,7 +1,13 @@
 package main.Metodos.MenuMethodF.CamisaMethodF;
 
+import java.io.EOFException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -18,7 +24,7 @@ public class ElMethod{
 
     static int almacen = 0;
 
-    static File infoCamisaEl;
+    static File infoCamisaEl = new File("src\\InfoProductos\\infoCamisaEl.txt");
     static FileWriter escribir;
     static PrintWriter imprimir;
 
@@ -73,37 +79,46 @@ public class ElMethod{
     }
 
     public static void writeToFileEl() {
-        try {
-            infoCamisaEl = new File("src\\InfoProductos\\infoCamisaEl.txt");
+            try (FileOutputStream fileOut = new FileOutputStream(infoCamisaEl);
+                                ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
 
-            if (infoCamisaEl.exists()) {
-                infoCamisaEl.delete();
-            }
+                        // Serializar objetos Gorra en el archivo
+                        for (El el : elArray) {
+                                if (el != null) {
+                                        objectOut.writeObject(el);
+                                }
+                        }
 
-            if (!infoCamisaEl.exists()) {
-                infoCamisaEl.createNewFile();
-            }
+                } catch (IOException e) {
+                        System.out.println(e);
+                }
+    }
 
-            escribir = new FileWriter(infoCamisaEl, true);
+    public static void readerFileEl(){
+        int contadorArray = 0;
+                try (FileInputStream fileIn = new FileInputStream(infoCamisaEl);
+                                ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
 
-            imprimir = new PrintWriter(escribir);
+                        try {
 
-            for (El el : elArray) {
-                imprimir.println(el.getNombre());
-                imprimir.println(el.getPrecio());
-                imprimir.println(el.getColor());
-                imprimir.println(el.getMarca());
-                imprimir.println(el.getTalla());
-                imprimir.println(el.getTela());
-                imprimir.println(el.getTipo());
-            }
+                                while (true) {
+                                        El el = (El) objectIn.readObject();
+                                        @SuppressWarnings("unused")
+                                        El contador = new El();
+                                        elArray.add(el);
 
-            imprimir.close();
-            escribir.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al escribir en el archivo",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
+                                        contadorArray++;
+                                }
+                        } catch (EOFException e) {
+                                // Fin del archivo, salir del bucle
+                        } catch (ClassNotFoundException | IOException e) {
+                                System.out.println("Error al leer los objetos: " + e.getMessage());
+                        }
+
+                } catch (IOException e) {
+                        System.out.println("Error al abrir el archivo: " + e.getMessage());
+                }
+                almacen = contadorArray++;
     }
 
     public static void inputCamisaEl() {
@@ -188,13 +203,13 @@ public class ElMethod{
                     throw new NullPointerException();
                 }
                 String tela = JOptionPane.showInputDialog(null,
-                        "Ingrese el material de la Camisa para El " + (almacen + 1) + ":",
-                        "MATERIAL");
+                        "Ingrese la tela de la Camisa para El " + (almacen + 1) + ":",
+                        "TELA");
                 if (tela == null) {
                     throw new NullPointerException();
                 }
                 String tipo = JOptionPane.showInputDialog(null,
-                        "Ingrese la categoria de la Camisa para El " + (almacen + 1) + ":",
+                        "Ingrese el tipo de la Camisa para El " + (almacen + 1) + ":",
                         "TIPO");
                 if (tipo == null) {
                     throw new NullPointerException();
@@ -485,13 +500,13 @@ public class ElMethod{
                             throw new NullPointerException();
                         }
                         String tela = JOptionPane.showInputDialog(null,
-                                "Ingrese el material de la Camisa para El " + (almacen + 1) + ":",
-                                "MATERIAL");
+                                "Ingrese la tela de la Camisa para El " + (almacen + 1) + ":",
+                                "TELA");
                         if (tela == null) {
                             throw new NullPointerException();
                         }
                         String tipo = JOptionPane.showInputDialog(null,
-                                "Ingrese la categoria de la Camisa para El " + (almacen + 1) + ":",
+                                "Ingrese el tipo de la Camisa para El " + (almacen + 1) + ":",
                                 "TIPO");
                         if (tipo == null) {
                             throw new NullPointerException();

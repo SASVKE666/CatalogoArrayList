@@ -1,7 +1,13 @@
 package main.Metodos.MenuMethodF.CamisaMethodF;
 
+import java.io.EOFException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -18,7 +24,8 @@ public class EllaMethod {
 
         static int almacen = 0;
 
-        static File infoCamisaElla;
+        static File infoCamisaElla = new File("src\\InfoProductos\\infoCamisaElla.txt");
+
         static FileWriter escribir;
         static PrintWriter imprimir;
 
@@ -74,37 +81,47 @@ public class EllaMethod {
         }
 
         public static void writeToFileElla() {
-                try {
-                        infoCamisaElla = new File("src\\InfoProductos\\infoCamisaElla.txt");
+                try (FileOutputStream fileOut = new FileOutputStream(infoCamisaElla);
+                                ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
 
-                        if (infoCamisaElla.exists()) {
-                                infoCamisaElla.delete();
-                        }
-
-                        if (!infoCamisaElla.exists()) {
-                                infoCamisaElla.createNewFile();
-                        }
-
-                        escribir = new FileWriter(infoCamisaElla, true);
-                        imprimir = new PrintWriter(escribir);
-
+                        // Serializar objetos Gorra en el archivo
                         for (Ella ella : ellaArray) {
-                                imprimir.println(ella.getNombre());
-                                imprimir.println(ella.getPrecio());
-                                imprimir.println(ella.getColor());
-                                imprimir.println(ella.getMarca());
-                                imprimir.println(ella.getTalla());
-                                imprimir.println(ella.getTela());
-                                imprimir.println(ella.getEstilo());
+                                if (ella != null) {
+                                        objectOut.writeObject(ella);
+                                }
                         }
 
-                        imprimir.close();
-                        escribir.close();
-
-                } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "Error al escribir en el archivo",
-                                        "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (IOException e) {
+                        System.out.println(e);
                 }
+        }
+
+        public static void readerFileElla(){
+
+                int contadorArray = 0;
+                try (FileInputStream fileIn = new FileInputStream(infoCamisaElla);
+                                ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
+
+                        try {
+
+                                while (true) {
+                                        Ella ella = (Ella) objectIn.readObject();
+                                        @SuppressWarnings("unused")
+                                        Ella contador = new Ella();
+                                        ellaArray.add(ella);
+
+                                        contadorArray++;
+                                }
+                        } catch (EOFException e) {
+                                // Fin del archivo, salir del bucle
+                        } catch (ClassNotFoundException | IOException e) {
+                                System.out.println("Error al leer los objetos: " + e.getMessage());
+                        }
+
+                } catch (IOException e) {
+                        System.out.println("Error al abrir el archivo: " + e.getMessage());
+                }
+                almacen = contadorArray++;
         }
 
         public static void inputCamisaElla() {
@@ -188,13 +205,13 @@ public class EllaMethod {
                                         throw new NullPointerException();
                                 }
                                 String tela = JOptionPane.showInputDialog(null,
-                                                "Ingrese el material de la Camisa para Ella " + (almacen + 1) + ":",
-                                                "MATERIAL");
+                                                "Ingrese la tela de la Camisa para Ella " + (almacen + 1) + ":",
+                                                "TELA");
                                 if (tela == null) {
                                         throw new NullPointerException();
                                 }
                                 String estilo = JOptionPane.showInputDialog(null,
-                                                "Ingrese la categoria de la Camisa para Ella " + (almacen + 1) + ":",
+                                                "Ingrese el estilo de la Camisa para Ella " + (almacen + 1) + ":",
                                                 "ESTILO");
                                 if (estilo == null) {
                                         throw new NullPointerException();
@@ -212,7 +229,6 @@ public class EllaMethod {
                                 almacen++;
 
                         }
-
 
                 } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Ingreso Cancelado",
@@ -495,14 +511,14 @@ public class EllaMethod {
                                                         throw new NullPointerException();
                                                 }
                                                 String tela = JOptionPane.showInputDialog(null,
-                                                                "Ingrese el material de la Camisa para Ella "
+                                                                "Ingrese la tela de la Camisa para Ella "
                                                                                 + (almacen + 1) + ":",
-                                                                "MATERIAL");
+                                                                "TELA");
                                                 if (tela == null) {
                                                         throw new NullPointerException();
                                                 }
                                                 String estilo = JOptionPane.showInputDialog(null,
-                                                                "Ingrese la categoria de la Camisa para Ella "
+                                                                "Ingrese el estilo de la Camisa para Ella "
                                                                                 + (almacen + 1) + ":",
                                                                 "ESTILO");
                                                 if (estilo == null) {

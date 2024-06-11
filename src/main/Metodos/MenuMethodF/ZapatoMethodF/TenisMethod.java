@@ -1,12 +1,19 @@
 package main.Metodos.MenuMethodF.ZapatoMethodF;
 
+import java.io.EOFException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import main.Clases.Products.PantalonF.Jeans;
 import main.Clases.Products.ZapatoF.Tenis;
 import main.Metodos.MenuMethodF.ZapatoMethod;
 
@@ -16,7 +23,8 @@ public class TenisMethod {
 
         static int almacen = 0;
 
-        static File infoZapatoTenis;
+        static File infoZapatoTenis = new File("src\\InfoProductos\\infoZapatoTenis.txt");
+
         static FileWriter escribir;
         static PrintWriter imprimir;
 
@@ -74,38 +82,46 @@ public class TenisMethod {
         }
 
         public static void writeToFileTenis() {
-                try {
-                        infoZapatoTenis = new File("src\\InfoProductos\\infoZapatoTenis.txt");
+                try (FileOutputStream fileOut = new FileOutputStream(infoZapatoTenis);
+                                ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
 
-                        if (infoZapatoTenis.exists()){
-                                infoZapatoTenis.delete();
-                        }
-                        
-                        if (!infoZapatoTenis.exists()) {
-                                infoZapatoTenis.createNewFile();
-                        }
-
-                        escribir = new FileWriter(infoZapatoTenis, true);
-
-                        imprimir = new PrintWriter(escribir);
-
-                        for (Tenis tenis : tenisArray) {
-                                imprimir.println(tenis.getNombre());
-                                imprimir.println(tenis.getPrecio());
-                                imprimir.println(tenis.getColor());
-                                imprimir.println(tenis.getMarca());
-                                imprimir.println(tenis.getTalla());
-                                imprimir.println(tenis.getMaterial());
-                                imprimir.println(tenis.getDeporte());
+                        // Serializar objetos Gorra en el archivo
+                        for (Tenis jeans : tenisArray) {
+                                if (jeans != null) {
+                                        objectOut.writeObject(jeans);
+                                }
                         }
 
-                        imprimir.close();
-                        escribir.close();
-
-                } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "Error al escribir en el archivo",
-                                        "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (IOException e) {
+                        System.out.println(e);
                 }
+        }
+
+        public static void readerFileTenis() {
+                int contadorArray = 0;
+                try (FileInputStream fileIn = new FileInputStream(infoZapatoTenis);
+                                ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
+
+                        try {
+
+                                while (true) {
+                                        Tenis tenis = (Tenis) objectIn.readObject();
+                                        @SuppressWarnings("unused")
+                                        Jeans contador = new Jeans();
+                                        tenisArray.add(tenis);
+
+                                        contadorArray++;
+                                }
+                        } catch (EOFException e) {
+                                // Fin del archivo, salir del bucle
+                        } catch (ClassNotFoundException | IOException e) {
+                                System.out.println("Error al leer los objetos: " + e.getMessage());
+                        }
+
+                } catch (IOException e) {
+                        System.out.println("Error al abrir el archivo: " + e.getMessage());
+                }
+                almacen = contadorArray++;
         }
 
         public static void inputZapatoTenis() {

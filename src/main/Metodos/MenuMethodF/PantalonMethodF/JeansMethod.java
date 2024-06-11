@@ -1,7 +1,13 @@
 package main.Metodos.MenuMethodF.PantalonMethodF;
 
+import java.io.EOFException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -18,7 +24,8 @@ public class JeansMethod {
 
         static int almacen = 0;
 
-        static File infoPantalonJeans;
+        static File infoPantalonJeans = new File("src\\InfoProductos\\infoPantalonJeans.txt");
+
         static FileWriter escribir;
         static PrintWriter imprimir;
 
@@ -74,38 +81,47 @@ public class JeansMethod {
         }
 
         public static void writeToFileJeans() {
-                try {
-                        infoPantalonJeans = new File("src\\InfoProductos\\infoPantalonJeans.txt");
+                try (FileOutputStream fileOut = new FileOutputStream(infoPantalonJeans);
+                                ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
 
-                        if (infoPantalonJeans.exists()) {
-                                infoPantalonJeans.delete();
-                        }
-
-                        if (!infoPantalonJeans.exists()) {
-                                infoPantalonJeans.createNewFile();
-                        }
-
-                        escribir = new FileWriter(infoPantalonJeans, true);
-
-                        imprimir = new PrintWriter(escribir);
-
+                        // Serializar objetos Gorra en el archivo
                         for (Jeans jeans : jeansArray) {
-                                imprimir.println(jeans.getNombre());
-                                imprimir.println(jeans.getPrecio());
-                                imprimir.println(jeans.getColor());
-                                imprimir.println(jeans.getMarca());
-                                imprimir.println(jeans.getTalla());
-                                imprimir.println(jeans.getTela());
-                                imprimir.println(jeans.getCorte());
+                                if (jeans != null) {
+                                        objectOut.writeObject(jeans);
+                                }
                         }
 
-                        imprimir.close();
-                        escribir.close();
-                } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "Error al escribir en el archivo",
-                                        "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (IOException e) {
+                        System.out.println(e);
                 }
 
+        }
+
+        public static void readerFileJeans(){
+                int contadorArray = 0;
+                try (FileInputStream fileIn = new FileInputStream(infoPantalonJeans);
+                                ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
+
+                        try {
+
+                                while (true) {
+                                        Jeans jeans = (Jeans) objectIn.readObject();
+                                        @SuppressWarnings("unused")
+                                        Jeans contador = new Jeans();
+                                        jeansArray.add(jeans);
+
+                                        contadorArray++;
+                                }
+                        } catch (EOFException e) {
+                                // Fin del archivo, salir del bucle
+                        } catch (ClassNotFoundException | IOException e) {
+                                System.out.println("Error al leer los objetos: " + e.getMessage());
+                        }
+
+                } catch (IOException e) {
+                        System.out.println("Error al abrir el archivo: " + e.getMessage());
+                }
+                almacen = contadorArray++;
         }
 
         public static void inputPantalonJeans() {
@@ -214,13 +230,13 @@ public class JeansMethod {
                                 }
 
                                 String tela = JOptionPane.showInputDialog(null,
-                                                "Ingrese el material del Pantalon Jean " + (almacen + 1) + ":",
-                                                "MATERIAL");
+                                                "Ingrese la tela del Pantalon Jean " + (almacen + 1) + ":",
+                                                "TELA");
                                 if (tela == null) {
                                         throw new NullPointerException();
                                 }
                                 String corte = JOptionPane.showInputDialog(null,
-                                                "Ingrese la categoria del Pantalon Jean " + (almacen + 1) + ":",
+                                                "Ingrese el corte del Pantalon Jean " + (almacen + 1) + ":",
                                                 "CORTE");
                                 if (corte == null) {
                                         throw new NullPointerException();
@@ -526,14 +542,14 @@ public class JeansMethod {
                                                 }
 
                                                 String tela = JOptionPane.showInputDialog(null,
-                                                                "Ingrese el material del Pantalon Jean " + (almacen + 1)
+                                                                "Ingrese la tela del Pantalon Jean " + (almacen + 1)
                                                                                 + ":",
-                                                                "MATERIAL");
+                                                                "TELA");
                                                 if (tela == null) {
                                                         throw new NullPointerException();
                                                 }
                                                 String corte = JOptionPane.showInputDialog(null,
-                                                                "Ingrese la categoria del Pantalon Jean "
+                                                                "Ingrese el corte del Pantalon Jean "
                                                                                 + (almacen + 1) + ":",
                                                                 "CORTE");
                                                 if (corte == null) {

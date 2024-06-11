@@ -75,7 +75,12 @@ public class MenuMethod {
     }
 
     public static void initializeReaderFileMethods(){
+        EllaMethod.readerFileElla();
+        ElMethod.readerFileEl();
+        JeansMethod.readerFileJeans();
         OtrosMethod.readerFileOtros();
+        CasualMethod.readerFileCasual();
+        TenisMethod.readerFileTenis();
     }
     
 }

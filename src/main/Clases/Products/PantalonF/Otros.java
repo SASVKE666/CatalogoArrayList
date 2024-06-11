@@ -1,7 +1,9 @@
 package main.Clases.Products.PantalonF;
+
+
 import main.Clases.Products.Pantalon;
 
-public class Otros extends Pantalon {
+public class Otros extends Pantalon{
 
     //  atributes
     private String estilo;

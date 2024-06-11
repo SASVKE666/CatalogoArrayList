@@ -1,7 +1,13 @@
 package main.Metodos.MenuMethodF.ZapatoMethodF;
 
+import java.io.EOFException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 /* importar libreria java.util.ArrayList para arreglos
 importar libreria javax.swing.JOptionPane para uso de cajas de texto, ingreso de datos y cajas de opciones */
@@ -24,7 +30,8 @@ public class CasualMethod {
      * variable estática tipo File. Esta variable representa un archivo en el
      * sistema.
      */
-    static File infoZapatoCasual;
+    static File infoZapatoCasual = new File("src\\InfoProductos\\infoZapatoCasual.txt");
+    ;
     /*
      * variable estática tipo FileWriter. Variable se utilizará para escribir en el
      * archivo.
@@ -143,83 +150,47 @@ public class CasualMethod {
     }
 
     public static void writeToFileCasual() {
-        try {
-            /*
-             * Se crea un nuevo objeto File llamado infoZapatoCasual que representa el
-             * archivo "infoZapatoCasual.txt" en el sistema de archivos.
-             */
-            infoZapatoCasual = new File("src\\InfoProductos\\infoZapatoCasual.txt");
 
-            /*
-             * Se comprueba si el archivo "infoZapatoCasual.txt" ya existe en el sistema de
-             * archivos.
-             */
-            if (infoZapatoCasual.exists()) {
-                /*
-                 * Si el archivo existe, se borrara para no osbreeecribir datos con el mismo
-                 * codigo.
-                 */
-                infoZapatoCasual.delete();
-            }
+        try (FileOutputStream fileOut = new FileOutputStream(infoZapatoCasual);
+                                ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
 
-            /*
-             * Se comprueba si el archivo "infoZapatoCasual.txt" no existe en el sistema de
-             * archivos.
-             */
-            if (!infoZapatoCasual.exists()) {
-                /*
-                 * Si el archivo no existe, se crea un nuevo archivo con el nombre
-                 * "infoZapatoCasual.txt".
-                 */
-                infoZapatoCasual.createNewFile();
-            }
+                        // Serializar objetos Gorra en el archivo
+                        for (Casual casual : casualArray) {
+                                if (casual != null) {
+                                        objectOut.writeObject(casual);
+                                }
+                        }
 
-            /*
-             * Se crea un nuevo objeto FileWriter llamado escribir, que se utilizará para
-             * escribir en el archivo "infoZapatoCasual.txt". El parámetro true indica que
-             * se añadirán los datos al final del archivo si este ya existe.
-             */
-            escribir = new FileWriter(infoZapatoCasual, true);
+                } catch (IOException e) {
+                        System.out.println(e);
+                }
+    }
 
-            /*
-             * Se crea un nuevo objeto PrintWriter llamado imprimir, que se utilizará para
-             * imprimir en el archivo utilizando el objeto FileWriter previamente creado.
-             */
-            imprimir = new PrintWriter(escribir);
+    public static void readerFileCasual(){
+        int contadorArray = 0;
+                try (FileInputStream fileIn = new FileInputStream(infoZapatoCasual);
+                                ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
 
-            /*
-             * El siguiente bloque de código recorre un array de objetos de la clase Casual
-             * llamado casualArray y escribe los atributos de cada objeto en el archivo
-             * "infoZapatoCasual.txt" utilizando el objeto PrintWriter:
-             */
-            for (Casual casual : casualArray) {
-                imprimir.println(casual.getNombre());
-                imprimir.println(casual.getPrecio());
-                imprimir.println(casual.getColor());
-                imprimir.println(casual.getMarca());
-                imprimir.println(casual.getTalla());
-                imprimir.println(casual.getMaterial());
-                imprimir.println(casual.getCategoria());
-            }
+                        try {
 
-            /*
-             * Se cierra el objeto PrintWriter, lo que asegura que todos los datos
-             * pendientes se escriban en el archivo y se liberen los recursos asociados.
-             */
-            imprimir.close();
-            /*
-             * Se cierra el objeto FileWriter, lo que asegura que todos los datos pendientes
-             * se escriban en el archivo y se liberen los recursos asociados.
-             */
-            escribir.close();
-            /*
-             * catch of the first try, if a general error is found in the method it will
-             * release the warning
-             */
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al escribir en el archivo",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
+                                while (true) {
+                                        Casual casual = (Casual) objectIn.readObject();
+                                        @SuppressWarnings("unused")
+                                        Casual contador = new Casual();
+                                        casualArray.add(casual);
+
+                                        contadorArray++;
+                                }
+                        } catch (EOFException e) {
+                                // Fin del archivo, salir del bucle
+                        } catch (ClassNotFoundException | IOException e) {
+                                System.out.println("Error al leer los objetos: " + e.getMessage());
+                        }
+
+                } catch (IOException e) {
+                        System.out.println("Error al abrir el archivo: " + e.getMessage());
+                }
+                almacen = contadorArray++;
     }
 
     /*
